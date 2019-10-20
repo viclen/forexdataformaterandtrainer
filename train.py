@@ -6,7 +6,7 @@ from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 import os
 
-forex = pd.read_csv("rates/completeday.csv",index_col="Time")
+forex = pd.read_csv("rates-p/complete15min.csv",index_col="Time")
 
 forex.index = pd.to_datetime(forex.index)
 
@@ -39,11 +39,26 @@ lbb = tf.feature_column.numeric_column('LBB')
 
 feat_cols = [ema, sma, rsi, hbb, lbb]
 
-input_func = tf.estimator.inputs.pandas_input_fn(x=X_train,y=y_train,batch_size=10,num_epochs=1000,shuffle=True)
+input_func = tf.estimator.inputs.pandas_input_fn(x=X_train,y=y_train,batch_size=100,num_epochs=2000,shuffle=True)
 
-model = tf.estimator.DNNRegressor(hidden_units=[6,10,12,12,10,6],feature_columns=feat_cols,model_dir=os.getcwd()+'/models',activation_fn=tf.nn.sigmoid)
+optimizer = tf.train.AdagradOptimizer(learning_rate=0.01)
 
-model.train(input_fn=input_func,steps=30000)
+model = tf.estimator.DNNRegressor(hidden_units=[512, 1024, 512, 256],
+                                feature_columns=feat_cols,
+                                model_dir=os.getcwd()+'/models',
+                                activation_fn=tf.nn.relu,
+                                optimizer=optimizer)
+
+# model = tf.estimator.DNNRegressor(hidden_units=[1024, 512, 256],
+#                                 optimizer=tf.train.ProximalAdagradOptimizer(
+#                                     learning_rate=0.1,
+#                                     l1_regularization_strength=0.001
+#                                 )
+#                                 feature_columns=feat_cols,
+#                                 model_dir=os.getcwd()+'/models',
+#                                 activation_fn=tf.nn.relu)
+
+print(model.train(input_fn=input_func,steps=30000))
 
 predict_input_func = tf.estimator.inputs.pandas_input_fn(
       x=X_test,

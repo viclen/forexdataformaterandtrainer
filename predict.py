@@ -21,7 +21,7 @@ X_test = X_test.sort_index()
 y_test = y_test.sort_index()
 
 scaler = MinMaxScaler()
-data_for_scale = pd.read_csv("rates/completeday.csv",index_col="Time").drop(["Value"],axis=1)
+data_for_scale = pd.read_csv("rates-p/completehour.csv",index_col="Time").drop(["Value"],axis=1)
 scaler.fit(data_for_scale)
 
 X_test = pd.DataFrame(data=scaler.transform(X_test),columns = X_test.columns,index=X_test.index)
@@ -34,7 +34,13 @@ lbb = tf.feature_column.numeric_column('LBB')
 
 feat_cols = [ema, sma, rsi, hbb, lbb]
 
-model = tf.estimator.DNNRegressor(hidden_units=[6,10,12,12,10,6],feature_columns=feat_cols,model_dir=os.getcwd() + "/models-h")
+optimizer = tf.train.AdagradOptimizer(learning_rate=0.01)
+
+model = tf.estimator.DNNRegressor(hidden_units=[512, 1024, 512, 256],
+                                feature_columns=feat_cols,
+                                model_dir=os.getcwd()+'/models',
+                                activation_fn=tf.nn.relu,
+                                optimizer=optimizer)
 
 predict_input_func = tf.estimator.inputs.pandas_input_fn(
       x=X_test,
