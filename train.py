@@ -41,7 +41,7 @@ feat_cols = [ema, sma, rsi, hbb, lbb]
 
 input_func = tf.estimator.inputs.pandas_input_fn(x=X_train,y=y_train,batch_size=10,num_epochs=1000,shuffle=True)
 
-model = tf.estimator.DNNRegressor(hidden_units=[6,10,12,12,10,6],feature_columns=feat_cols,model_dir=os.getcwd()+'/models-d')
+model = tf.estimator.DNNRegressor(hidden_units=[6,10,12,12,10,6],feature_columns=feat_cols,model_dir=os.getcwd()+'/models',activation_fn=tf.nn.sigmoid)
 
 model.train(input_fn=input_func,steps=30000)
 
