@@ -1,21 +1,19 @@
 import datetime
 import pandas as pd
+import tensorflow as tf
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
+from sklearn.metrics import mean_squared_error
+import os
 
-forex = pd.read_csv("completehour-p10.csv",index_col="Time")
+forex = pd.read_csv("rates/completeday.csv",index_col="Time")
 
-# forex.info()
-
-forex.index = forex.index.to_datetime()
-
-qnt = 100
+forex.index = pd.to_datetime(forex.index)
 
 x_data = forex.drop(['Value'],axis=1)
-
 y_val = forex['Value']
 
-X_train, X_test, y_train, y_test = train_test_split(x_data,y_val,test_size=0.3,random_state=101)
+X_train, X_test, y_train, y_test = train_test_split(x_data,y_val,test_size=0.000001)
 
 X_train.index = [i.timestamp() for i in X_train.index]
 X_test.index = [i.timestamp() for i in X_test.index]
@@ -28,5 +26,38 @@ y_train = y_train.sort_index()
 y_test = y_test.sort_index()
 
 scaler = MinMaxScaler()
-
 scaler.fit(X_train)
+
+X_train = pd.DataFrame(data=scaler.transform(X_train),columns = X_train.columns,index=X_train.index)
+X_test = pd.DataFrame(data=scaler.transform(X_test),columns = X_test.columns,index=X_test.index)
+
+ema = tf.feature_column.numeric_column('EMA')
+sma = tf.feature_column.numeric_column('SMA')
+rsi = tf.feature_column.numeric_column('RSI')
+hbb = tf.feature_column.numeric_column('HBB')
+lbb = tf.feature_column.numeric_column('LBB')
+
+feat_cols = [ema, sma, rsi, hbb, lbb]
+
+input_func = tf.estimator.inputs.pandas_input_fn(x=X_train,y=y_train,batch_size=10,num_epochs=1000,shuffle=True)
+
+model = tf.estimator.DNNRegressor(hidden_units=[6,10,12,12,10,6],feature_columns=feat_cols,model_dir=os.getcwd()+'/models-d')
+
+model.train(input_fn=input_func,steps=30000)
+
+predict_input_func = tf.estimator.inputs.pandas_input_fn(
+      x=X_test,
+      batch_size=10,
+      num_epochs=1,
+      shuffle=False)
+
+pred_gen = model.predict(predict_input_func)
+predictions = list(pred_gen)
+
+final_preds = []
+for pred in predictions:
+    final_preds.append(pred['predictions'])
+
+error = mean_squared_error(y_test,final_preds)**0.5
+
+print("Done\nError rate: {}".format(error))
