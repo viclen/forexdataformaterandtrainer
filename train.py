@@ -5,8 +5,9 @@ from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import MinMaxScaler
 from sklearn.metrics import mean_squared_error
 import os
+import time
 
-forex = pd.read_csv("rates-p/complete15min.csv",index_col="Time")
+forex = pd.read_csv("rates-p/completehour.csv",index_col="Time")
 
 forex.index = pd.to_datetime(forex.index)
 
@@ -43,7 +44,7 @@ input_func = tf.estimator.inputs.pandas_input_fn(x=X_train,y=y_train,batch_size=
 
 optimizer = tf.train.AdagradOptimizer(learning_rate=0.01)
 
-model = tf.estimator.DNNRegressor(hidden_units=[512, 1024, 512, 256],
+model = tf.estimator.DNNRegressor(hidden_units=[1024, 512, 256],
                                 feature_columns=feat_cols,
                                 model_dir=os.getcwd()+'/models',
                                 activation_fn=tf.nn.relu,
@@ -58,7 +59,10 @@ model = tf.estimator.DNNRegressor(hidden_units=[512, 1024, 512, 256],
 #                                 model_dir=os.getcwd()+'/models',
 #                                 activation_fn=tf.nn.relu)
 
-print(model.train(input_fn=input_func,steps=30000))
+print("Starting train")
+millis = time.time()
+model.train(input_fn=input_func,steps=50000)
+print("Total time: {} s".format(round(time.time() - millis, 3)))
 
 predict_input_func = tf.estimator.inputs.pandas_input_fn(
       x=X_test,

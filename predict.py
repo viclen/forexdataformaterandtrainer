@@ -36,7 +36,7 @@ feat_cols = [ema, sma, rsi, hbb, lbb]
 
 optimizer = tf.train.AdagradOptimizer(learning_rate=0.01)
 
-model = tf.estimator.DNNRegressor(hidden_units=[512, 1024, 512, 256],
+model = tf.estimator.DNNRegressor(hidden_units=[1024, 512, 256],
                                 feature_columns=feat_cols,
                                 model_dir=os.getcwd()+'/models',
                                 activation_fn=tf.nn.relu,

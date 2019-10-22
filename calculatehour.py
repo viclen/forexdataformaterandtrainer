@@ -1,7 +1,7 @@
 import os.path
 
 sma_period = 20
-rsi_period = 20
+rsi_period = 14
 
 prediction_period = 0
 
@@ -132,7 +132,7 @@ for line in lines:
     last_line = line
 
 if result.__len__():
-    result.__delitem__(slice(0,20))
+    result.__delitem__(slice(0,sma_period))
 
 info = ""
 for line in result:
