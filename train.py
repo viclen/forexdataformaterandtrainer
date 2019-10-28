@@ -7,7 +7,7 @@ from sklearn.metrics import mean_squared_error
 import os
 import time
 
-forex = pd.read_csv("rates-p/completehour.csv",index_col="Time")
+forex = pd.read_csv("rates-p/bitcoin.csv",index_col="Time")
 
 forex.index = pd.to_datetime(forex.index)
 
@@ -46,7 +46,7 @@ optimizer = tf.train.AdagradOptimizer(learning_rate=0.01)
 
 model = tf.estimator.DNNRegressor(hidden_units=[1024, 512, 256],
                                 feature_columns=feat_cols,
-                                model_dir=os.getcwd()+'/models',
+                                model_dir=os.getcwd()+'/models-b',
                                 activation_fn=tf.nn.relu,
                                 optimizer=optimizer)
 

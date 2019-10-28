@@ -58,7 +58,7 @@ for line in lines:
     for val in sma_values:
         sma += val
         sma_count += 1
-    if sma:
+    if sma_count > 0:
         sma = sma / sma_count
     else:
         sma = value
@@ -78,14 +78,14 @@ for line in lines:
         elif val > 0:
             gains += 1
             avg_gain += val
-    if gains:
+    if gains > 0:
         avg_gain = avg_gain / gains
-    if losses:
+    if losses > 0:
         avg_loss = avg_loss / losses
 
         rs = avg_gain / avg_loss
         rsi = 100 - (100 / (1 + rs))
-    if previous_value:
+    if previous_value != 0:
         rsi_values.append(value - previous_value)
     #########################################
 
@@ -102,7 +102,7 @@ for line in lines:
     sd = 0
     for val in sma_values:
         sd += (val - sma) ** 2
-    if sma_count:
+    if sma_count > 0:
         sd = (sd / sma_count) ** 0.5
     # --
 
@@ -114,7 +114,7 @@ for line in lines:
     ##########################################
 
     # Result array
-    if time.__len__() and value and rsi and sma:
+    if time.__len__()>0 and value!=0 and rsi!=0 and sma!=0:
         result.append("{},{},{},{},{},{},{}\r\n".format(time,ema,sma,rsi,higher_band,lower_band,next_value))
 
     previous_value = value
@@ -127,7 +127,7 @@ for line in lines:
 
     last_line = line
 
-if result.__len__():
+if result.__len__() > 0:
     result.__delitem__(slice(0,sma_period))
 
 info = ""
