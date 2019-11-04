@@ -26,15 +26,18 @@ scaler.fit(data_for_scale)
 
 X_test = pd.DataFrame(data=scaler.transform(X_test),columns = X_test.columns,index=X_test.index)
 
-ema = tf.feature_column.numeric_column('EMA')
-sma = tf.feature_column.numeric_column('SMA')
-rsi = tf.feature_column.numeric_column('RSI')
+short_ema = tf.feature_column.numeric_column('shortEMA')
+short_sma = tf.feature_column.numeric_column('shortSMA')
+short_rsi = tf.feature_column.numeric_column('shortRSI')
+long_ema = tf.feature_column.numeric_column('longEMA')
+long_sma = tf.feature_column.numeric_column('longSMA')
+long_rsi = tf.feature_column.numeric_column('longRSI')
 hbb = tf.feature_column.numeric_column('HBB')
 lbb = tf.feature_column.numeric_column('LBB')
 
-feat_cols = [ema, sma, rsi, hbb, lbb]
+feat_cols = [short_ema, short_sma, short_rsi, long_ema, long_sma, long_rsi, hbb, lbb]
 
-optimizer = tf.train.AdagradOptimizer(learning_rate=0.01)
+optimizer = tf.train.AdamOptimizer(learning_rate=0.001).minimize(tf.losses.softmax_cross_entropy)
 
 model = tf.estimator.DNNRegressor(hidden_units=[1024, 512, 256],
                                 feature_columns=feat_cols,

@@ -181,6 +181,9 @@ node {
         type: DT_DOUBLE
         type: DT_DOUBLE
         type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -212,6 +215,12 @@ node {
     key: "shapes"
     value {
       list {
+        shape {
+        }
+        shape {
+        }
+        shape {
+        }
         shape {
         }
         shape {
@@ -440,6 +449,93 @@ node {
   }
 }
 node {
+  name: "enqueue_input/Placeholder_7"
+  op: "Placeholder"
+  device: "/device:CPU:0"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          unknown_rank: true
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        unknown_rank: true
+      }
+    }
+  }
+}
+node {
+  name: "enqueue_input/Placeholder_8"
+  op: "Placeholder"
+  device: "/device:CPU:0"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          unknown_rank: true
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        unknown_rank: true
+      }
+    }
+  }
+}
+node {
+  name: "enqueue_input/Placeholder_9"
+  op: "Placeholder"
+  device: "/device:CPU:0"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          unknown_rank: true
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        unknown_rank: true
+      }
+    }
+  }
+}
+node {
   name: "enqueue_input/random_shuffle_queue_EnqueueMany"
   op: "QueueEnqueueManyV2"
   input: "enqueue_input/random_shuffle_queue"
@@ -450,11 +546,17 @@ node {
   input: "enqueue_input/Placeholder_4"
   input: "enqueue_input/Placeholder_5"
   input: "enqueue_input/Placeholder_6"
+  input: "enqueue_input/Placeholder_7"
+  input: "enqueue_input/Placeholder_8"
+  input: "enqueue_input/Placeholder_9"
   device: "/device:CPU:0"
   attr {
     key: "Tcomponents"
     value {
       list {
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
         type: DT_DOUBLE
         type: DT_DOUBLE
         type: DT_DOUBLE
@@ -826,6 +928,21 @@ node {
             size: -1
           }
         }
+        shape {
+          dim {
+            size: -1
+          }
+        }
+        shape {
+          dim {
+            size: -1
+          }
+        }
+        shape {
+          dim {
+            size: -1
+          }
+        }
       }
     }
   }
@@ -840,6 +957,9 @@ node {
         type: DT_DOUBLE
         type: DT_DOUBLE
         type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
+        type: DT_DOUBLE
       }
     }
   }
@@ -847,396 +967,6 @@ node {
     key: "timeout_ms"
     value {
       i: -1
-    }
-  }
-}
-node {
-  name: "dnn/input_from_feature_columns/input_layer/EMA/ExpandDims/dim"
-  op: "Const"
-  attr {
-    key: "_output_shapes"
-    value {
-      list {
-        shape {
-        }
-      }
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-        }
-        int_val: -1
-      }
-    }
-  }
-}
-node {
-  name: "dnn/input_from_feature_columns/input_layer/EMA/ExpandDims"
-  op: "ExpandDims"
-  input: "random_shuffle_queue_DequeueUpTo:1"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/ExpandDims/dim"
-  attr {
-    key: "T"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "Tdim"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "_output_shapes"
-    value {
-      list {
-        shape {
-          dim {
-            size: -1
-          }
-          dim {
-            size: 1
-          }
-        }
-      }
-    }
-  }
-}
-node {
-  name: "dnn/input_from_feature_columns/input_layer/EMA/ToFloat"
-  op: "Cast"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/ExpandDims"
-  attr {
-    key: "DstT"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "SrcT"
-    value {
-      type: DT_DOUBLE
-    }
-  }
-  attr {
-    key: "_output_shapes"
-    value {
-      list {
-        shape {
-          dim {
-            size: -1
-          }
-          dim {
-            size: 1
-          }
-        }
-      }
-    }
-  }
-}
-node {
-  name: "dnn/input_from_feature_columns/input_layer/EMA/Shape"
-  op: "Shape"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/ToFloat"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "_output_shapes"
-    value {
-      list {
-        shape {
-          dim {
-            size: 2
-          }
-        }
-      }
-    }
-  }
-  attr {
-    key: "out_type"
-    value {
-      type: DT_INT32
-    }
-  }
-}
-node {
-  name: "dnn/input_from_feature_columns/input_layer/EMA/strided_slice/stack"
-  op: "Const"
-  attr {
-    key: "_output_shapes"
-    value {
-      list {
-        shape {
-          dim {
-            size: 1
-          }
-        }
-      }
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 0
-      }
-    }
-  }
-}
-node {
-  name: "dnn/input_from_feature_columns/input_layer/EMA/strided_slice/stack_1"
-  op: "Const"
-  attr {
-    key: "_output_shapes"
-    value {
-      list {
-        shape {
-          dim {
-            size: 1
-          }
-        }
-      }
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "dnn/input_from_feature_columns/input_layer/EMA/strided_slice/stack_2"
-  op: "Const"
-  attr {
-    key: "_output_shapes"
-    value {
-      list {
-        shape {
-          dim {
-            size: 1
-          }
-        }
-      }
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-          dim {
-            size: 1
-          }
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "dnn/input_from_feature_columns/input_layer/EMA/strided_slice"
-  op: "StridedSlice"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/Shape"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/strided_slice/stack"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/strided_slice/stack_1"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/strided_slice/stack_2"
-  attr {
-    key: "Index"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "_output_shapes"
-    value {
-      list {
-        shape {
-        }
-      }
-    }
-  }
-  attr {
-    key: "begin_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "ellipsis_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "end_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "new_axis_mask"
-    value {
-      i: 0
-    }
-  }
-  attr {
-    key: "shrink_axis_mask"
-    value {
-      i: 1
-    }
-  }
-}
-node {
-  name: "dnn/input_from_feature_columns/input_layer/EMA/Reshape/shape/1"
-  op: "Const"
-  attr {
-    key: "_output_shapes"
-    value {
-      list {
-        shape {
-        }
-      }
-    }
-  }
-  attr {
-    key: "dtype"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "value"
-    value {
-      tensor {
-        dtype: DT_INT32
-        tensor_shape {
-        }
-        int_val: 1
-      }
-    }
-  }
-}
-node {
-  name: "dnn/input_from_feature_columns/input_layer/EMA/Reshape/shape"
-  op: "Pack"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/strided_slice"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/Reshape/shape/1"
-  attr {
-    key: "N"
-    value {
-      i: 2
-    }
-  }
-  attr {
-    key: "T"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "_output_shapes"
-    value {
-      list {
-        shape {
-          dim {
-            size: 2
-          }
-        }
-      }
-    }
-  }
-  attr {
-    key: "axis"
-    value {
-      i: 0
-    }
-  }
-}
-node {
-  name: "dnn/input_from_feature_columns/input_layer/EMA/Reshape"
-  op: "Reshape"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/ToFloat"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/Reshape/shape"
-  attr {
-    key: "T"
-    value {
-      type: DT_FLOAT
-    }
-  }
-  attr {
-    key: "Tshape"
-    value {
-      type: DT_INT32
-    }
-  }
-  attr {
-    key: "_output_shapes"
-    value {
-      list {
-        shape {
-          dim {
-            size: -1
-          }
-          dim {
-            size: 1
-          }
-        }
-      }
     }
   }
 }
@@ -1273,7 +1003,7 @@ node {
 node {
   name: "dnn/input_from_feature_columns/input_layer/HBB/ExpandDims"
   op: "ExpandDims"
-  input: "random_shuffle_queue_DequeueUpTo:4"
+  input: "random_shuffle_queue_DequeueUpTo:7"
   input: "dnn/input_from_feature_columns/input_layer/HBB/ExpandDims/dim"
   attr {
     key: "T"
@@ -1663,7 +1393,7 @@ node {
 node {
   name: "dnn/input_from_feature_columns/input_layer/LBB/ExpandDims"
   op: "ExpandDims"
-  input: "random_shuffle_queue_DequeueUpTo:5"
+  input: "random_shuffle_queue_DequeueUpTo:8"
   input: "dnn/input_from_feature_columns/input_layer/LBB/ExpandDims/dim"
   attr {
     key: "T"
@@ -2021,7 +1751,7 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/RSI/ExpandDims/dim"
+  name: "dnn/input_from_feature_columns/input_layer/longEMA/ExpandDims/dim"
   op: "Const"
   attr {
     key: "_output_shapes"
@@ -2051,10 +1781,10 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/RSI/ExpandDims"
+  name: "dnn/input_from_feature_columns/input_layer/longEMA/ExpandDims"
   op: "ExpandDims"
-  input: "random_shuffle_queue_DequeueUpTo:3"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/ExpandDims/dim"
+  input: "random_shuffle_queue_DequeueUpTo:4"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/ExpandDims/dim"
   attr {
     key: "T"
     value {
@@ -2084,9 +1814,9 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/RSI/ToFloat"
+  name: "dnn/input_from_feature_columns/input_layer/longEMA/ToFloat"
   op: "Cast"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/ExpandDims"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/ExpandDims"
   attr {
     key: "DstT"
     value {
@@ -2116,9 +1846,9 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/RSI/Shape"
+  name: "dnn/input_from_feature_columns/input_layer/longEMA/Shape"
   op: "Shape"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/ToFloat"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/ToFloat"
   attr {
     key: "T"
     value {
@@ -2145,7 +1875,7 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/RSI/strided_slice/stack"
+  name: "dnn/input_from_feature_columns/input_layer/longEMA/strided_slice/stack"
   op: "Const"
   attr {
     key: "_output_shapes"
@@ -2181,7 +1911,7 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/RSI/strided_slice/stack_1"
+  name: "dnn/input_from_feature_columns/input_layer/longEMA/strided_slice/stack_1"
   op: "Const"
   attr {
     key: "_output_shapes"
@@ -2217,7 +1947,7 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/RSI/strided_slice/stack_2"
+  name: "dnn/input_from_feature_columns/input_layer/longEMA/strided_slice/stack_2"
   op: "Const"
   attr {
     key: "_output_shapes"
@@ -2253,12 +1983,12 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/RSI/strided_slice"
+  name: "dnn/input_from_feature_columns/input_layer/longEMA/strided_slice"
   op: "StridedSlice"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/Shape"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/strided_slice/stack"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/strided_slice/stack_1"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/strided_slice/stack_2"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/Shape"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/strided_slice/stack"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/strided_slice/stack_1"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/strided_slice/stack_2"
   attr {
     key: "Index"
     value {
@@ -2312,7 +2042,7 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/RSI/Reshape/shape/1"
+  name: "dnn/input_from_feature_columns/input_layer/longEMA/Reshape/shape/1"
   op: "Const"
   attr {
     key: "_output_shapes"
@@ -2342,10 +2072,10 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/RSI/Reshape/shape"
+  name: "dnn/input_from_feature_columns/input_layer/longEMA/Reshape/shape"
   op: "Pack"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/strided_slice"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/Reshape/shape/1"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/strided_slice"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/Reshape/shape/1"
   attr {
     key: "N"
     value {
@@ -2378,10 +2108,10 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/RSI/Reshape"
+  name: "dnn/input_from_feature_columns/input_layer/longEMA/Reshape"
   op: "Reshape"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/ToFloat"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/Reshape/shape"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/ToFloat"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/Reshape/shape"
   attr {
     key: "T"
     value {
@@ -2411,7 +2141,7 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/SMA/ExpandDims/dim"
+  name: "dnn/input_from_feature_columns/input_layer/longRSI/ExpandDims/dim"
   op: "Const"
   attr {
     key: "_output_shapes"
@@ -2441,10 +2171,10 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/SMA/ExpandDims"
+  name: "dnn/input_from_feature_columns/input_layer/longRSI/ExpandDims"
   op: "ExpandDims"
-  input: "random_shuffle_queue_DequeueUpTo:2"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/ExpandDims/dim"
+  input: "random_shuffle_queue_DequeueUpTo:6"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/ExpandDims/dim"
   attr {
     key: "T"
     value {
@@ -2474,9 +2204,9 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/SMA/ToFloat"
+  name: "dnn/input_from_feature_columns/input_layer/longRSI/ToFloat"
   op: "Cast"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/ExpandDims"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/ExpandDims"
   attr {
     key: "DstT"
     value {
@@ -2506,9 +2236,9 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/SMA/Shape"
+  name: "dnn/input_from_feature_columns/input_layer/longRSI/Shape"
   op: "Shape"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/ToFloat"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/ToFloat"
   attr {
     key: "T"
     value {
@@ -2535,7 +2265,7 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/SMA/strided_slice/stack"
+  name: "dnn/input_from_feature_columns/input_layer/longRSI/strided_slice/stack"
   op: "Const"
   attr {
     key: "_output_shapes"
@@ -2571,7 +2301,7 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/SMA/strided_slice/stack_1"
+  name: "dnn/input_from_feature_columns/input_layer/longRSI/strided_slice/stack_1"
   op: "Const"
   attr {
     key: "_output_shapes"
@@ -2607,7 +2337,7 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/SMA/strided_slice/stack_2"
+  name: "dnn/input_from_feature_columns/input_layer/longRSI/strided_slice/stack_2"
   op: "Const"
   attr {
     key: "_output_shapes"
@@ -2643,12 +2373,12 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/SMA/strided_slice"
+  name: "dnn/input_from_feature_columns/input_layer/longRSI/strided_slice"
   op: "StridedSlice"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/Shape"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/strided_slice/stack"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/strided_slice/stack_1"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/strided_slice/stack_2"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/Shape"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/strided_slice/stack"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/strided_slice/stack_1"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/strided_slice/stack_2"
   attr {
     key: "Index"
     value {
@@ -2702,7 +2432,7 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/SMA/Reshape/shape/1"
+  name: "dnn/input_from_feature_columns/input_layer/longRSI/Reshape/shape/1"
   op: "Const"
   attr {
     key: "_output_shapes"
@@ -2732,10 +2462,10 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/SMA/Reshape/shape"
+  name: "dnn/input_from_feature_columns/input_layer/longRSI/Reshape/shape"
   op: "Pack"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/strided_slice"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/Reshape/shape/1"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/strided_slice"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/Reshape/shape/1"
   attr {
     key: "N"
     value {
@@ -2768,10 +2498,1570 @@ node {
   }
 }
 node {
-  name: "dnn/input_from_feature_columns/input_layer/SMA/Reshape"
+  name: "dnn/input_from_feature_columns/input_layer/longRSI/Reshape"
   op: "Reshape"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/ToFloat"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/Reshape/shape"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/ToFloat"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/Reshape/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/longSMA/ExpandDims/dim"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: -1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/longSMA/ExpandDims"
+  op: "ExpandDims"
+  input: "random_shuffle_queue_DequeueUpTo:5"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/ExpandDims/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/longSMA/ToFloat"
+  op: "Cast"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/ExpandDims"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/longSMA/Shape"
+  op: "Shape"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/ToFloat"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 2
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "out_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/longSMA/strided_slice/stack"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/longSMA/strided_slice/stack_1"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/longSMA/strided_slice/stack_2"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/longSMA/strided_slice"
+  op: "StridedSlice"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/Shape"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/strided_slice/stack"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/strided_slice/stack_1"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/strided_slice/stack_2"
+  attr {
+    key: "Index"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "begin_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "ellipsis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "end_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "new_axis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "shrink_axis_mask"
+    value {
+      i: 1
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/longSMA/Reshape/shape/1"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/longSMA/Reshape/shape"
+  op: "Pack"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/strided_slice"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/Reshape/shape/1"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 2
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/longSMA/Reshape"
+  op: "Reshape"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/ToFloat"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/Reshape/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortEMA/ExpandDims/dim"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: -1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortEMA/ExpandDims"
+  op: "ExpandDims"
+  input: "random_shuffle_queue_DequeueUpTo:1"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/ExpandDims/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortEMA/ToFloat"
+  op: "Cast"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/ExpandDims"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortEMA/Shape"
+  op: "Shape"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/ToFloat"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 2
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "out_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortEMA/strided_slice/stack"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortEMA/strided_slice/stack_1"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortEMA/strided_slice/stack_2"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortEMA/strided_slice"
+  op: "StridedSlice"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/Shape"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/strided_slice/stack"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/strided_slice/stack_1"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/strided_slice/stack_2"
+  attr {
+    key: "Index"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "begin_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "ellipsis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "end_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "new_axis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "shrink_axis_mask"
+    value {
+      i: 1
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortEMA/Reshape/shape/1"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortEMA/Reshape/shape"
+  op: "Pack"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/strided_slice"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/Reshape/shape/1"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 2
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortEMA/Reshape"
+  op: "Reshape"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/ToFloat"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/Reshape/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortRSI/ExpandDims/dim"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: -1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortRSI/ExpandDims"
+  op: "ExpandDims"
+  input: "random_shuffle_queue_DequeueUpTo:3"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/ExpandDims/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortRSI/ToFloat"
+  op: "Cast"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/ExpandDims"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortRSI/Shape"
+  op: "Shape"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/ToFloat"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 2
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "out_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortRSI/strided_slice/stack"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortRSI/strided_slice/stack_1"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortRSI/strided_slice/stack_2"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortRSI/strided_slice"
+  op: "StridedSlice"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/Shape"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/strided_slice/stack"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/strided_slice/stack_1"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/strided_slice/stack_2"
+  attr {
+    key: "Index"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "begin_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "ellipsis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "end_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "new_axis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "shrink_axis_mask"
+    value {
+      i: 1
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortRSI/Reshape/shape/1"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortRSI/Reshape/shape"
+  op: "Pack"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/strided_slice"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/Reshape/shape/1"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 2
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortRSI/Reshape"
+  op: "Reshape"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/ToFloat"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/Reshape/shape"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "Tshape"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortSMA/ExpandDims/dim"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: -1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortSMA/ExpandDims"
+  op: "ExpandDims"
+  input: "random_shuffle_queue_DequeueUpTo:2"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/ExpandDims/dim"
+  attr {
+    key: "T"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "Tdim"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortSMA/ToFloat"
+  op: "Cast"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/ExpandDims"
+  attr {
+    key: "DstT"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "SrcT"
+    value {
+      type: DT_DOUBLE
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: -1
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortSMA/Shape"
+  op: "Shape"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/ToFloat"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 2
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "out_type"
+    value {
+      type: DT_INT32
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortSMA/strided_slice/stack"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortSMA/strided_slice/stack_1"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortSMA/strided_slice/stack_2"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortSMA/strided_slice"
+  op: "StridedSlice"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/Shape"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/strided_slice/stack"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/strided_slice/stack_1"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/strided_slice/stack_2"
+  attr {
+    key: "Index"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "begin_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "ellipsis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "end_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "new_axis_mask"
+    value {
+      i: 0
+    }
+  }
+  attr {
+    key: "shrink_axis_mask"
+    value {
+      i: 1
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortSMA/Reshape/shape/1"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_INT32
+        tensor_shape {
+        }
+        int_val: 1
+      }
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortSMA/Reshape/shape"
+  op: "Pack"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/strided_slice"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/Reshape/shape/1"
+  attr {
+    key: "N"
+    value {
+      i: 2
+    }
+  }
+  attr {
+    key: "T"
+    value {
+      type: DT_INT32
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 2
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "axis"
+    value {
+      i: 0
+    }
+  }
+}
+node {
+  name: "dnn/input_from_feature_columns/input_layer/shortSMA/Reshape"
+  op: "Reshape"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/ToFloat"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/Reshape/shape"
   attr {
     key: "T"
     value {
@@ -2833,16 +4123,19 @@ node {
 node {
   name: "dnn/input_from_feature_columns/input_layer/concat"
   op: "ConcatV2"
-  input: "dnn/input_from_feature_columns/input_layer/EMA/Reshape"
   input: "dnn/input_from_feature_columns/input_layer/HBB/Reshape"
   input: "dnn/input_from_feature_columns/input_layer/LBB/Reshape"
-  input: "dnn/input_from_feature_columns/input_layer/RSI/Reshape"
-  input: "dnn/input_from_feature_columns/input_layer/SMA/Reshape"
+  input: "dnn/input_from_feature_columns/input_layer/longEMA/Reshape"
+  input: "dnn/input_from_feature_columns/input_layer/longRSI/Reshape"
+  input: "dnn/input_from_feature_columns/input_layer/longSMA/Reshape"
+  input: "dnn/input_from_feature_columns/input_layer/shortEMA/Reshape"
+  input: "dnn/input_from_feature_columns/input_layer/shortRSI/Reshape"
+  input: "dnn/input_from_feature_columns/input_layer/shortSMA/Reshape"
   input: "dnn/input_from_feature_columns/input_layer/concat/axis"
   attr {
     key: "N"
     value {
-      i: 5
+      i: 8
     }
   }
   attr {
@@ -2866,7 +4159,7 @@ node {
             size: -1
           }
           dim {
-            size: 5
+            size: 8
           }
         }
       }
@@ -2912,7 +4205,7 @@ node {
             size: 2
           }
         }
-        tensor_content: "\005\000\000\000\000\004\000\000"
+        tensor_content: "\010\000\000\000\000\004\000\000"
       }
     }
   }
@@ -2950,7 +4243,7 @@ node {
         dtype: DT_FLOAT
         tensor_shape {
         }
-        float_val: -0.07636035233736038
+        float_val: -0.07624928653240204
       }
     }
   }
@@ -2988,7 +4281,7 @@ node {
         dtype: DT_FLOAT
         tensor_shape {
         }
-        float_val: 0.07636035233736038
+        float_val: 0.07624928653240204
       }
     }
   }
@@ -3017,7 +4310,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -3041,7 +4334,7 @@ node {
   attr {
     key: "seed2"
     value {
-      i: 87
+      i: 123
     }
   }
 }
@@ -3099,7 +4392,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -3134,7 +4427,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -3161,7 +4454,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -3187,7 +4480,7 @@ node {
     value {
       shape {
         dim {
-          size: 5
+          size: 8
         }
         dim {
           size: 1024
@@ -3227,7 +4520,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -3273,7 +4566,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -3470,7 +4763,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -4029,7 +5322,7 @@ node {
   attr {
     key: "seed2"
     value {
-      i: 115
+      i: 151
     }
   }
 }
@@ -5017,7 +6310,7 @@ node {
   attr {
     key: "seed2"
     value {
-      i: 143
+      i: 179
     }
   }
 }
@@ -6005,7 +7298,7 @@ node {
   attr {
     key: "seed2"
     value {
-      i: 171
+      i: 207
     }
   }
 }
@@ -7200,7 +8493,7 @@ node {
 node {
   name: "dnn/head/ToFloat"
   op: "Cast"
-  input: "random_shuffle_queue_DequeueUpTo:6"
+  input: "random_shuffle_queue_DequeueUpTo:9"
   attr {
     key: "DstT"
     value {
@@ -11731,7 +13024,7 @@ node {
             size: -1
           }
           dim {
-            size: 5
+            size: 8
           }
         }
       }
@@ -11767,7 +13060,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -11823,7 +13116,7 @@ node {
             size: -1
           }
           dim {
-            size: 5
+            size: 8
           }
         }
       }
@@ -11855,7 +13148,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -11866,7 +13159,7 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad/Initializer/Const"
+  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta/Initializer/zeros"
   op: "Const"
   attr {
     key: "_class"
@@ -11882,7 +13175,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -11904,19 +13197,19 @@ node {
         dtype: DT_FLOAT
         tensor_shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
           }
         }
-        float_val: 0.10000000149011612
+        float_val: 0.0
       }
     }
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad"
+  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta"
   op: "VariableV2"
   attr {
     key: "_class"
@@ -11932,7 +13225,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -11958,7 +13251,7 @@ node {
     value {
       shape {
         dim {
-          size: 5
+          size: 8
         }
         dim {
           size: 1024
@@ -11974,10 +13267,10 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad/Assign"
+  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta/Assign"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad"
-  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad/Initializer/Const"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta/Initializer/zeros"
   attr {
     key: "T"
     value {
@@ -11998,7 +13291,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -12021,9 +13314,9 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad/read"
+  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta/read"
   op: "Identity"
-  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta"
   attr {
     key: "T"
     value {
@@ -12044,7 +13337,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -12055,7 +13348,196 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad/Initializer/Const"
+  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 8
+          }
+          dim {
+            size: 1024
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 8
+          }
+          dim {
+            size: 1024
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1"
+  op: "VariableV2"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 8
+          }
+          dim {
+            size: 1024
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 8
+        }
+        dim {
+          size: 1024
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1/Assign"
+  op: "Assign"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1/Initializer/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 8
+          }
+          dim {
+            size: 1024
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1/read"
+  op: "Identity"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 8
+          }
+          dim {
+            size: 1024
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta/Initializer/zeros"
   op: "Const"
   attr {
     key: "_class"
@@ -12093,13 +13575,13 @@ node {
             size: 1024
           }
         }
-        float_val: 0.10000000149011612
+        float_val: 0.0
       }
     }
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad"
+  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta"
   op: "VariableV2"
   attr {
     key: "_class"
@@ -12151,10 +13633,10 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad/Assign"
+  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta/Assign"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad"
-  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad/Initializer/Const"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta/Initializer/zeros"
   attr {
     key: "T"
     value {
@@ -12195,9 +13677,9 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad/read"
+  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta/read"
   op: "Identity"
-  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta"
   attr {
     key: "T"
     value {
@@ -12226,7 +13708,178 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad/Initializer/Const"
+  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1024
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1024
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1"
+  op: "VariableV2"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1024
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1024
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1/Assign"
+  op: "Assign"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1/Initializer/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1024
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1/read"
+  op: "Identity"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1024
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta/Initializer/zeros"
   op: "Const"
   attr {
     key: "_class"
@@ -12270,13 +13923,13 @@ node {
             size: 512
           }
         }
-        float_val: 0.10000000149011612
+        float_val: 0.0
       }
     }
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad"
+  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta"
   op: "VariableV2"
   attr {
     key: "_class"
@@ -12334,10 +13987,10 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad/Assign"
+  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta/Assign"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad"
-  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad/Initializer/Const"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta/Initializer/zeros"
   attr {
     key: "T"
     value {
@@ -12381,9 +14034,9 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad/read"
+  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta/read"
   op: "Identity"
-  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta"
   attr {
     key: "T"
     value {
@@ -12415,7 +14068,196 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad/Initializer/Const"
+  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1024
+          }
+          dim {
+            size: 512
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1024
+          }
+          dim {
+            size: 512
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1"
+  op: "VariableV2"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1024
+          }
+          dim {
+            size: 512
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1024
+        }
+        dim {
+          size: 512
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1/Assign"
+  op: "Assign"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1/Initializer/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1024
+          }
+          dim {
+            size: 512
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1/read"
+  op: "Identity"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1024
+          }
+          dim {
+            size: 512
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta/Initializer/zeros"
   op: "Const"
   attr {
     key: "_class"
@@ -12453,13 +14295,13 @@ node {
             size: 512
           }
         }
-        float_val: 0.10000000149011612
+        float_val: 0.0
       }
     }
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad"
+  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta"
   op: "VariableV2"
   attr {
     key: "_class"
@@ -12511,10 +14353,10 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad/Assign"
+  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta/Assign"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad"
-  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad/Initializer/Const"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta/Initializer/zeros"
   attr {
     key: "T"
     value {
@@ -12555,9 +14397,9 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad/read"
+  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta/read"
   op: "Identity"
-  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta"
   attr {
     key: "T"
     value {
@@ -12586,7 +14428,178 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad/Initializer/Const"
+  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 512
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 512
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1"
+  op: "VariableV2"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 512
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 512
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1/Assign"
+  op: "Assign"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1/Initializer/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 512
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1/read"
+  op: "Identity"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 512
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta/Initializer/zeros"
   op: "Const"
   attr {
     key: "_class"
@@ -12630,13 +14643,13 @@ node {
             size: 256
           }
         }
-        float_val: 0.10000000149011612
+        float_val: 0.0
       }
     }
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad"
+  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta"
   op: "VariableV2"
   attr {
     key: "_class"
@@ -12694,10 +14707,10 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad/Assign"
+  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta/Assign"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad"
-  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad/Initializer/Const"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta/Initializer/zeros"
   attr {
     key: "T"
     value {
@@ -12741,9 +14754,9 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad/read"
+  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta/read"
   op: "Identity"
-  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta"
   attr {
     key: "T"
     value {
@@ -12775,7 +14788,196 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad/Initializer/Const"
+  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 512
+          }
+          dim {
+            size: 256
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 512
+          }
+          dim {
+            size: 256
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1"
+  op: "VariableV2"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 512
+          }
+          dim {
+            size: 256
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 512
+        }
+        dim {
+          size: 256
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1/Assign"
+  op: "Assign"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1/Initializer/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 512
+          }
+          dim {
+            size: 256
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1/read"
+  op: "Identity"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 512
+          }
+          dim {
+            size: 256
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta/Initializer/zeros"
   op: "Const"
   attr {
     key: "_class"
@@ -12813,13 +15015,13 @@ node {
             size: 256
           }
         }
-        float_val: 0.10000000149011612
+        float_val: 0.0
       }
     }
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad"
+  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta"
   op: "VariableV2"
   attr {
     key: "_class"
@@ -12871,10 +15073,10 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad/Assign"
+  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta/Assign"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad"
-  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad/Initializer/Const"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta/Initializer/zeros"
   attr {
     key: "T"
     value {
@@ -12915,9 +15117,9 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad/read"
+  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta/read"
   op: "Identity"
-  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta"
   attr {
     key: "T"
     value {
@@ -12946,7 +15148,178 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/logits/kernel/part_0/Adagrad/Initializer/Const"
+  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 256
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 256
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1"
+  op: "VariableV2"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 256
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 256
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1/Assign"
+  op: "Assign"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1/Initializer/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 256
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1/read"
+  op: "Identity"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 256
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/logits/kernel/part_0/Adadelta/Initializer/zeros"
   op: "Const"
   attr {
     key: "_class"
@@ -12990,13 +15363,13 @@ node {
             size: 1
           }
         }
-        float_val: 0.10000000149011612
+        float_val: 0.0
       }
     }
   }
 }
 node {
-  name: "dnn/dnn/logits/kernel/part_0/Adagrad"
+  name: "dnn/dnn/logits/kernel/part_0/Adadelta"
   op: "VariableV2"
   attr {
     key: "_class"
@@ -13054,10 +15427,10 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/logits/kernel/part_0/Adagrad/Assign"
+  name: "dnn/dnn/logits/kernel/part_0/Adadelta/Assign"
   op: "Assign"
-  input: "dnn/dnn/logits/kernel/part_0/Adagrad"
-  input: "dnn/dnn/logits/kernel/part_0/Adagrad/Initializer/Const"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta/Initializer/zeros"
   attr {
     key: "T"
     value {
@@ -13101,9 +15474,9 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/logits/kernel/part_0/Adagrad/read"
+  name: "dnn/dnn/logits/kernel/part_0/Adadelta/read"
   op: "Identity"
-  input: "dnn/dnn/logits/kernel/part_0/Adagrad"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta"
   attr {
     key: "T"
     value {
@@ -13135,7 +15508,196 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/logits/bias/part_0/Adagrad/Initializer/Const"
+  name: "dnn/dnn/logits/kernel/part_0/Adadelta_1/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 256
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 256
+          }
+          dim {
+            size: 1
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/logits/kernel/part_0/Adadelta_1"
+  op: "VariableV2"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 256
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 256
+        }
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "dnn/dnn/logits/kernel/part_0/Adadelta_1/Assign"
+  op: "Assign"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta_1"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta_1/Initializer/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 256
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "dnn/dnn/logits/kernel/part_0/Adadelta_1/read"
+  op: "Identity"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 256
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/logits/bias/part_0/Adadelta/Initializer/zeros"
   op: "Const"
   attr {
     key: "_class"
@@ -13173,13 +15735,13 @@ node {
             size: 1
           }
         }
-        float_val: 0.10000000149011612
+        float_val: 0.0
       }
     }
   }
 }
 node {
-  name: "dnn/dnn/logits/bias/part_0/Adagrad"
+  name: "dnn/dnn/logits/bias/part_0/Adadelta"
   op: "VariableV2"
   attr {
     key: "_class"
@@ -13231,10 +15793,10 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/logits/bias/part_0/Adagrad/Assign"
+  name: "dnn/dnn/logits/bias/part_0/Adadelta/Assign"
   op: "Assign"
-  input: "dnn/dnn/logits/bias/part_0/Adagrad"
-  input: "dnn/dnn/logits/bias/part_0/Adagrad/Initializer/Const"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta/Initializer/zeros"
   attr {
     key: "T"
     value {
@@ -13275,9 +15837,9 @@ node {
   }
 }
 node {
-  name: "dnn/dnn/logits/bias/part_0/Adagrad/read"
+  name: "dnn/dnn/logits/bias/part_0/Adadelta/read"
   op: "Identity"
-  input: "dnn/dnn/logits/bias/part_0/Adagrad"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta"
   attr {
     key: "T"
     value {
@@ -13306,7 +15868,178 @@ node {
   }
 }
 node {
-  name: "dnn/Adagrad/learning_rate"
+  name: "dnn/dnn/logits/bias/part_0/Adadelta_1/Initializer/zeros"
+  op: "Const"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        float_val: 0.0
+      }
+    }
+  }
+}
+node {
+  name: "dnn/dnn/logits/bias/part_0/Adadelta_1"
+  op: "VariableV2"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "container"
+    value {
+      s: ""
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "shape"
+    value {
+      shape {
+        dim {
+          size: 1
+        }
+      }
+    }
+  }
+  attr {
+    key: "shared_name"
+    value {
+      s: ""
+    }
+  }
+}
+node {
+  name: "dnn/dnn/logits/bias/part_0/Adadelta_1/Assign"
+  op: "Assign"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta_1"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta_1/Initializer/zeros"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "dnn/dnn/logits/bias/part_0/Adadelta_1/read"
+  op: "Identity"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta_1"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+}
+node {
+  name: "dnn/Adadelta/lr"
   op: "Const"
   attr {
     key: "_output_shapes"
@@ -13336,11 +16069,74 @@ node {
   }
 }
 node {
-  name: "dnn/Adagrad/update_dnn/hiddenlayer_0/kernel/part_0/ApplyAdagrad"
-  op: "ApplyAdagrad"
+  name: "dnn/Adadelta/rho"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 0.949999988079071
+      }
+    }
+  }
+}
+node {
+  name: "dnn/Adadelta/epsilon"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_FLOAT
+        tensor_shape {
+        }
+        float_val: 9.99999993922529e-09
+      }
+    }
+  }
+}
+node {
+  name: "dnn/Adadelta/update_dnn/hiddenlayer_0/kernel/part_0/ApplyAdadelta"
+  op: "ApplyAdadelta"
   input: "dnn/hiddenlayer_0/kernel/part_0"
-  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad"
-  input: "dnn/Adagrad/learning_rate"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1"
+  input: "dnn/Adadelta/lr"
+  input: "dnn/Adadelta/rho"
+  input: "dnn/Adadelta/epsilon"
   input: "dnn/gradients/dnn/hiddenlayer_0/MatMul_grad/tuple/control_dependency_1"
   attr {
     key: "T"
@@ -13362,7 +16158,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -13379,11 +16175,14 @@ node {
   }
 }
 node {
-  name: "dnn/Adagrad/update_dnn/hiddenlayer_0/bias/part_0/ApplyAdagrad"
-  op: "ApplyAdagrad"
+  name: "dnn/Adadelta/update_dnn/hiddenlayer_0/bias/part_0/ApplyAdadelta"
+  op: "ApplyAdadelta"
   input: "dnn/hiddenlayer_0/bias/part_0"
-  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad"
-  input: "dnn/Adagrad/learning_rate"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1"
+  input: "dnn/Adadelta/lr"
+  input: "dnn/Adadelta/rho"
+  input: "dnn/Adadelta/epsilon"
   input: "dnn/gradients/dnn/hiddenlayer_0/BiasAdd_grad/tuple/control_dependency_1"
   attr {
     key: "T"
@@ -13419,11 +16218,14 @@ node {
   }
 }
 node {
-  name: "dnn/Adagrad/update_dnn/hiddenlayer_1/kernel/part_0/ApplyAdagrad"
-  op: "ApplyAdagrad"
+  name: "dnn/Adadelta/update_dnn/hiddenlayer_1/kernel/part_0/ApplyAdadelta"
+  op: "ApplyAdadelta"
   input: "dnn/hiddenlayer_1/kernel/part_0"
-  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad"
-  input: "dnn/Adagrad/learning_rate"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1"
+  input: "dnn/Adadelta/lr"
+  input: "dnn/Adadelta/rho"
+  input: "dnn/Adadelta/epsilon"
   input: "dnn/gradients/dnn/hiddenlayer_1/MatMul_grad/tuple/control_dependency_1"
   attr {
     key: "T"
@@ -13462,11 +16264,14 @@ node {
   }
 }
 node {
-  name: "dnn/Adagrad/update_dnn/hiddenlayer_1/bias/part_0/ApplyAdagrad"
-  op: "ApplyAdagrad"
+  name: "dnn/Adadelta/update_dnn/hiddenlayer_1/bias/part_0/ApplyAdadelta"
+  op: "ApplyAdadelta"
   input: "dnn/hiddenlayer_1/bias/part_0"
-  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad"
-  input: "dnn/Adagrad/learning_rate"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1"
+  input: "dnn/Adadelta/lr"
+  input: "dnn/Adadelta/rho"
+  input: "dnn/Adadelta/epsilon"
   input: "dnn/gradients/dnn/hiddenlayer_1/BiasAdd_grad/tuple/control_dependency_1"
   attr {
     key: "T"
@@ -13502,11 +16307,14 @@ node {
   }
 }
 node {
-  name: "dnn/Adagrad/update_dnn/hiddenlayer_2/kernel/part_0/ApplyAdagrad"
-  op: "ApplyAdagrad"
+  name: "dnn/Adadelta/update_dnn/hiddenlayer_2/kernel/part_0/ApplyAdadelta"
+  op: "ApplyAdadelta"
   input: "dnn/hiddenlayer_2/kernel/part_0"
-  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad"
-  input: "dnn/Adagrad/learning_rate"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1"
+  input: "dnn/Adadelta/lr"
+  input: "dnn/Adadelta/rho"
+  input: "dnn/Adadelta/epsilon"
   input: "dnn/gradients/dnn/hiddenlayer_2/MatMul_grad/tuple/control_dependency_1"
   attr {
     key: "T"
@@ -13545,11 +16353,14 @@ node {
   }
 }
 node {
-  name: "dnn/Adagrad/update_dnn/hiddenlayer_2/bias/part_0/ApplyAdagrad"
-  op: "ApplyAdagrad"
+  name: "dnn/Adadelta/update_dnn/hiddenlayer_2/bias/part_0/ApplyAdadelta"
+  op: "ApplyAdadelta"
   input: "dnn/hiddenlayer_2/bias/part_0"
-  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad"
-  input: "dnn/Adagrad/learning_rate"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1"
+  input: "dnn/Adadelta/lr"
+  input: "dnn/Adadelta/rho"
+  input: "dnn/Adadelta/epsilon"
   input: "dnn/gradients/dnn/hiddenlayer_2/BiasAdd_grad/tuple/control_dependency_1"
   attr {
     key: "T"
@@ -13585,11 +16396,14 @@ node {
   }
 }
 node {
-  name: "dnn/Adagrad/update_dnn/logits/kernel/part_0/ApplyAdagrad"
-  op: "ApplyAdagrad"
+  name: "dnn/Adadelta/update_dnn/logits/kernel/part_0/ApplyAdadelta"
+  op: "ApplyAdadelta"
   input: "dnn/logits/kernel/part_0"
-  input: "dnn/dnn/logits/kernel/part_0/Adagrad"
-  input: "dnn/Adagrad/learning_rate"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta_1"
+  input: "dnn/Adadelta/lr"
+  input: "dnn/Adadelta/rho"
+  input: "dnn/Adadelta/epsilon"
   input: "dnn/gradients/dnn/logits/MatMul_grad/tuple/control_dependency_1"
   attr {
     key: "T"
@@ -13628,11 +16442,14 @@ node {
   }
 }
 node {
-  name: "dnn/Adagrad/update_dnn/logits/bias/part_0/ApplyAdagrad"
-  op: "ApplyAdagrad"
+  name: "dnn/Adadelta/update_dnn/logits/bias/part_0/ApplyAdadelta"
+  op: "ApplyAdadelta"
   input: "dnn/logits/bias/part_0"
-  input: "dnn/dnn/logits/bias/part_0/Adagrad"
-  input: "dnn/Adagrad/learning_rate"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta_1"
+  input: "dnn/Adadelta/lr"
+  input: "dnn/Adadelta/rho"
+  input: "dnn/Adadelta/epsilon"
   input: "dnn/gradients/dnn/logits/BiasAdd_grad/tuple/control_dependency_1"
   attr {
     key: "T"
@@ -13668,21 +16485,21 @@ node {
   }
 }
 node {
-  name: "dnn/Adagrad/update"
+  name: "dnn/Adadelta/update"
   op: "NoOp"
-  input: "^dnn/Adagrad/update_dnn/hiddenlayer_0/kernel/part_0/ApplyAdagrad"
-  input: "^dnn/Adagrad/update_dnn/hiddenlayer_0/bias/part_0/ApplyAdagrad"
-  input: "^dnn/Adagrad/update_dnn/hiddenlayer_1/kernel/part_0/ApplyAdagrad"
-  input: "^dnn/Adagrad/update_dnn/hiddenlayer_1/bias/part_0/ApplyAdagrad"
-  input: "^dnn/Adagrad/update_dnn/hiddenlayer_2/kernel/part_0/ApplyAdagrad"
-  input: "^dnn/Adagrad/update_dnn/hiddenlayer_2/bias/part_0/ApplyAdagrad"
-  input: "^dnn/Adagrad/update_dnn/logits/kernel/part_0/ApplyAdagrad"
-  input: "^dnn/Adagrad/update_dnn/logits/bias/part_0/ApplyAdagrad"
+  input: "^dnn/Adadelta/update_dnn/hiddenlayer_0/kernel/part_0/ApplyAdadelta"
+  input: "^dnn/Adadelta/update_dnn/hiddenlayer_0/bias/part_0/ApplyAdadelta"
+  input: "^dnn/Adadelta/update_dnn/hiddenlayer_1/kernel/part_0/ApplyAdadelta"
+  input: "^dnn/Adadelta/update_dnn/hiddenlayer_1/bias/part_0/ApplyAdadelta"
+  input: "^dnn/Adadelta/update_dnn/hiddenlayer_2/kernel/part_0/ApplyAdadelta"
+  input: "^dnn/Adadelta/update_dnn/hiddenlayer_2/bias/part_0/ApplyAdadelta"
+  input: "^dnn/Adadelta/update_dnn/logits/kernel/part_0/ApplyAdadelta"
+  input: "^dnn/Adadelta/update_dnn/logits/bias/part_0/ApplyAdadelta"
 }
 node {
-  name: "dnn/Adagrad/value"
+  name: "dnn/Adadelta/value"
   op: "Const"
-  input: "^dnn/Adagrad/update"
+  input: "^dnn/Adadelta/update"
   attr {
     key: "_class"
     value {
@@ -13719,10 +16536,10 @@ node {
   }
 }
 node {
-  name: "dnn/Adagrad"
+  name: "dnn/Adadelta"
   op: "AssignAdd"
   input: "global_step"
-  input: "dnn/Adagrad/value"
+  input: "dnn/Adadelta/value"
   attr {
     key: "T"
     value {
@@ -13765,14 +16582,22 @@ node {
   input: "^dnn/hiddenlayer_2/bias/part_0/Assign"
   input: "^dnn/logits/kernel/part_0/Assign"
   input: "^dnn/logits/bias/part_0/Assign"
-  input: "^dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad/Assign"
-  input: "^dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad/Assign"
-  input: "^dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad/Assign"
-  input: "^dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad/Assign"
-  input: "^dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad/Assign"
-  input: "^dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad/Assign"
-  input: "^dnn/dnn/logits/kernel/part_0/Adagrad/Assign"
-  input: "^dnn/dnn/logits/bias/part_0/Adagrad/Assign"
+  input: "^dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta/Assign"
+  input: "^dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1/Assign"
+  input: "^dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta/Assign"
+  input: "^dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1/Assign"
+  input: "^dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta/Assign"
+  input: "^dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1/Assign"
+  input: "^dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta/Assign"
+  input: "^dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1/Assign"
+  input: "^dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta/Assign"
+  input: "^dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1/Assign"
+  input: "^dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta/Assign"
+  input: "^dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1/Assign"
+  input: "^dnn/dnn/logits/kernel/part_0/Adadelta/Assign"
+  input: "^dnn/dnn/logits/kernel/part_0/Adadelta_1/Assign"
+  input: "^dnn/dnn/logits/bias/part_0/Adadelta/Assign"
+  input: "^dnn/dnn/logits/bias/part_0/Adadelta_1/Assign"
 }
 node {
   name: "init_1"
@@ -14039,7 +16864,7 @@ node {
 node {
   name: "report_uninitialized_variables/IsVariableInitialized_9"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -14067,7 +16892,35 @@ node {
 node {
   name: "report_uninitialized_variables/IsVariableInitialized_10"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables/IsVariableInitialized_11"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -14093,9 +16946,37 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables/IsVariableInitialized_11"
+  name: "report_uninitialized_variables/IsVariableInitialized_12"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables/IsVariableInitialized_13"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -14121,9 +17002,37 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables/IsVariableInitialized_12"
+  name: "report_uninitialized_variables/IsVariableInitialized_14"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables/IsVariableInitialized_15"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -14149,9 +17058,37 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables/IsVariableInitialized_13"
+  name: "report_uninitialized_variables/IsVariableInitialized_16"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables/IsVariableInitialized_17"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -14177,9 +17114,37 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables/IsVariableInitialized_14"
+  name: "report_uninitialized_variables/IsVariableInitialized_18"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables/IsVariableInitialized_19"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -14205,9 +17170,37 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables/IsVariableInitialized_15"
+  name: "report_uninitialized_variables/IsVariableInitialized_20"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/logits/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables/IsVariableInitialized_21"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -14233,9 +17226,65 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables/IsVariableInitialized_16"
+  name: "report_uninitialized_variables/IsVariableInitialized_22"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/logits/bias/part_0/Adagrad"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables/IsVariableInitialized_23"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables/IsVariableInitialized_24"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta_1"
   attr {
     key: "_class"
     value {
@@ -14280,11 +17329,19 @@ node {
   input: "report_uninitialized_variables/IsVariableInitialized_14"
   input: "report_uninitialized_variables/IsVariableInitialized_15"
   input: "report_uninitialized_variables/IsVariableInitialized_16"
+  input: "report_uninitialized_variables/IsVariableInitialized_17"
+  input: "report_uninitialized_variables/IsVariableInitialized_18"
+  input: "report_uninitialized_variables/IsVariableInitialized_19"
+  input: "report_uninitialized_variables/IsVariableInitialized_20"
+  input: "report_uninitialized_variables/IsVariableInitialized_21"
+  input: "report_uninitialized_variables/IsVariableInitialized_22"
+  input: "report_uninitialized_variables/IsVariableInitialized_23"
+  input: "report_uninitialized_variables/IsVariableInitialized_24"
   device: "/device:CPU:0"
   attr {
     key: "N"
     value {
-      i: 17
+      i: 25
     }
   }
   attr {
@@ -14299,7 +17356,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -14323,7 +17380,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -14340,7 +17397,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -14359,7 +17416,7 @@ node {
         dtype: DT_STRING
         tensor_shape {
           dim {
-            size: 17
+            size: 25
           }
         }
         string_val: "global_step"
@@ -14371,14 +17428,22 @@ node {
         string_val: "dnn/hiddenlayer_2/bias/part_0"
         string_val: "dnn/logits/kernel/part_0"
         string_val: "dnn/logits/bias/part_0"
-        string_val: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad"
-        string_val: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad"
-        string_val: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad"
-        string_val: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad"
-        string_val: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad"
-        string_val: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad"
-        string_val: "dnn/dnn/logits/kernel/part_0/Adagrad"
-        string_val: "dnn/dnn/logits/bias/part_0/Adagrad"
+        string_val: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1"
+        string_val: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1"
+        string_val: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1"
+        string_val: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1"
+        string_val: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1"
+        string_val: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1"
+        string_val: "dnn/dnn/logits/kernel/part_0/Adadelta"
+        string_val: "dnn/dnn/logits/kernel/part_0/Adadelta_1"
+        string_val: "dnn/dnn/logits/bias/part_0/Adadelta"
+        string_val: "dnn/dnn/logits/bias/part_0/Adadelta_1"
       }
     }
   }
@@ -14415,7 +17480,7 @@ node {
             size: 1
           }
         }
-        int_val: 17
+        int_val: 25
       }
     }
   }
@@ -14697,7 +17762,7 @@ node {
             size: 1
           }
         }
-        int_val: 17
+        int_val: 25
       }
     }
   }
@@ -15004,7 +18069,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -15072,7 +18137,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -15525,7 +18590,7 @@ node {
 node {
   name: "report_uninitialized_variables_1/IsVariableInitialized_9"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -15553,7 +18618,35 @@ node {
 node {
   name: "report_uninitialized_variables_1/IsVariableInitialized_10"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables_1/IsVariableInitialized_11"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -15579,9 +18672,37 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables_1/IsVariableInitialized_11"
+  name: "report_uninitialized_variables_1/IsVariableInitialized_12"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_0/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables_1/IsVariableInitialized_13"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -15607,9 +18728,37 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables_1/IsVariableInitialized_12"
+  name: "report_uninitialized_variables_1/IsVariableInitialized_14"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables_1/IsVariableInitialized_15"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -15635,9 +18784,37 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables_1/IsVariableInitialized_13"
+  name: "report_uninitialized_variables_1/IsVariableInitialized_16"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_1/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables_1/IsVariableInitialized_17"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -15663,9 +18840,37 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables_1/IsVariableInitialized_14"
+  name: "report_uninitialized_variables_1/IsVariableInitialized_18"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables_1/IsVariableInitialized_19"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -15691,9 +18896,37 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables_1/IsVariableInitialized_15"
+  name: "report_uninitialized_variables_1/IsVariableInitialized_20"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/logits/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables_1/IsVariableInitialized_21"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta"
   attr {
     key: "_class"
     value {
@@ -15719,9 +18952,65 @@ node {
   }
 }
 node {
-  name: "report_uninitialized_variables_1/IsVariableInitialized_16"
+  name: "report_uninitialized_variables_1/IsVariableInitialized_22"
   op: "IsVariableInitialized"
-  input: "dnn/dnn/logits/bias/part_0/Adagrad"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta_1"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables_1/IsVariableInitialized_23"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta"
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_FLOAT
+    }
+  }
+}
+node {
+  name: "report_uninitialized_variables_1/IsVariableInitialized_24"
+  op: "IsVariableInitialized"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta_1"
   attr {
     key: "_class"
     value {
@@ -15766,11 +19055,19 @@ node {
   input: "report_uninitialized_variables_1/IsVariableInitialized_14"
   input: "report_uninitialized_variables_1/IsVariableInitialized_15"
   input: "report_uninitialized_variables_1/IsVariableInitialized_16"
+  input: "report_uninitialized_variables_1/IsVariableInitialized_17"
+  input: "report_uninitialized_variables_1/IsVariableInitialized_18"
+  input: "report_uninitialized_variables_1/IsVariableInitialized_19"
+  input: "report_uninitialized_variables_1/IsVariableInitialized_20"
+  input: "report_uninitialized_variables_1/IsVariableInitialized_21"
+  input: "report_uninitialized_variables_1/IsVariableInitialized_22"
+  input: "report_uninitialized_variables_1/IsVariableInitialized_23"
+  input: "report_uninitialized_variables_1/IsVariableInitialized_24"
   device: "/device:CPU:0"
   attr {
     key: "N"
     value {
-      i: 17
+      i: 25
     }
   }
   attr {
@@ -15785,7 +19082,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -15809,7 +19106,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -15826,7 +19123,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -15845,7 +19142,7 @@ node {
         dtype: DT_STRING
         tensor_shape {
           dim {
-            size: 17
+            size: 25
           }
         }
         string_val: "global_step"
@@ -15857,14 +19154,22 @@ node {
         string_val: "dnn/hiddenlayer_2/bias/part_0"
         string_val: "dnn/logits/kernel/part_0"
         string_val: "dnn/logits/bias/part_0"
-        string_val: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad"
-        string_val: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad"
-        string_val: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad"
-        string_val: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad"
-        string_val: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad"
-        string_val: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad"
-        string_val: "dnn/dnn/logits/kernel/part_0/Adagrad"
-        string_val: "dnn/dnn/logits/bias/part_0/Adagrad"
+        string_val: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1"
+        string_val: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1"
+        string_val: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1"
+        string_val: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1"
+        string_val: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1"
+        string_val: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta"
+        string_val: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1"
+        string_val: "dnn/dnn/logits/kernel/part_0/Adadelta"
+        string_val: "dnn/dnn/logits/kernel/part_0/Adadelta_1"
+        string_val: "dnn/dnn/logits/bias/part_0/Adadelta"
+        string_val: "dnn/dnn/logits/bias/part_0/Adadelta_1"
       }
     }
   }
@@ -15901,7 +19206,7 @@ node {
             size: 1
           }
         }
-        int_val: 17
+        int_val: 25
       }
     }
   }
@@ -16183,7 +19488,7 @@ node {
             size: 1
           }
         }
-        int_val: 17
+        int_val: 25
       }
     }
   }
@@ -16490,7 +19795,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -16558,7 +19863,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -16754,7 +20059,7 @@ node {
         dtype: DT_STRING
         tensor_shape {
         }
-        string_val: "_temp_e4cf79f30fa641d696f291a53ee8ce91/part"
+        string_val: "_temp_38370f7963234f10b6cb216cbce8842e/part"
       }
     }
   }
@@ -16871,7 +20176,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -16890,25 +20195,33 @@ node {
         dtype: DT_STRING
         tensor_shape {
           dim {
-            size: 17
+            size: 25
           }
         }
         string_val: "dnn/hiddenlayer_0/bias"
-        string_val: "dnn/hiddenlayer_0/bias/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_0/bias/t_0/Adadelta"
+        string_val: "dnn/hiddenlayer_0/bias/t_0/Adadelta_1"
         string_val: "dnn/hiddenlayer_0/kernel"
-        string_val: "dnn/hiddenlayer_0/kernel/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_0/kernel/t_0/Adadelta"
+        string_val: "dnn/hiddenlayer_0/kernel/t_0/Adadelta_1"
         string_val: "dnn/hiddenlayer_1/bias"
-        string_val: "dnn/hiddenlayer_1/bias/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_1/bias/t_0/Adadelta"
+        string_val: "dnn/hiddenlayer_1/bias/t_0/Adadelta_1"
         string_val: "dnn/hiddenlayer_1/kernel"
-        string_val: "dnn/hiddenlayer_1/kernel/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_1/kernel/t_0/Adadelta"
+        string_val: "dnn/hiddenlayer_1/kernel/t_0/Adadelta_1"
         string_val: "dnn/hiddenlayer_2/bias"
-        string_val: "dnn/hiddenlayer_2/bias/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_2/bias/t_0/Adadelta"
+        string_val: "dnn/hiddenlayer_2/bias/t_0/Adadelta_1"
         string_val: "dnn/hiddenlayer_2/kernel"
-        string_val: "dnn/hiddenlayer_2/kernel/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_2/kernel/t_0/Adadelta"
+        string_val: "dnn/hiddenlayer_2/kernel/t_0/Adadelta_1"
         string_val: "dnn/logits/bias"
-        string_val: "dnn/logits/bias/t_0/Adagrad"
+        string_val: "dnn/logits/bias/t_0/Adadelta"
+        string_val: "dnn/logits/bias/t_0/Adadelta_1"
         string_val: "dnn/logits/kernel"
-        string_val: "dnn/logits/kernel/t_0/Adagrad"
+        string_val: "dnn/logits/kernel/t_0/Adadelta"
+        string_val: "dnn/logits/kernel/t_0/Adadelta_1"
         string_val: "global_step"
       }
     }
@@ -16923,7 +20236,7 @@ node {
       list {
         shape {
           dim {
-            size: 17
+            size: 25
           }
         }
       }
@@ -16942,23 +20255,31 @@ node {
         dtype: DT_STRING
         tensor_shape {
           dim {
-            size: 17
+            size: 25
           }
         }
         string_val: "1024 0,1024"
         string_val: "1024 0,1024"
-        string_val: "5 1024 0,5:0,1024"
-        string_val: "5 1024 0,5:0,1024"
+        string_val: "1024 0,1024"
+        string_val: "8 1024 0,8:0,1024"
+        string_val: "8 1024 0,8:0,1024"
+        string_val: "8 1024 0,8:0,1024"
+        string_val: "512 0,512"
         string_val: "512 0,512"
         string_val: "512 0,512"
         string_val: "1024 512 0,1024:0,512"
         string_val: "1024 512 0,1024:0,512"
+        string_val: "1024 512 0,1024:0,512"
+        string_val: "256 0,256"
         string_val: "256 0,256"
         string_val: "256 0,256"
         string_val: "512 256 0,512:0,256"
         string_val: "512 256 0,512:0,256"
+        string_val: "512 256 0,512:0,256"
         string_val: "1 0,1"
         string_val: "1 0,1"
+        string_val: "1 0,1"
+        string_val: "256 1 0,256:0,1"
         string_val: "256 1 0,256:0,1"
         string_val: "256 1 0,256:0,1"
         string_val: ""
@@ -16973,26 +20294,42 @@ node {
   input: "save/SaveV2/tensor_names"
   input: "save/SaveV2/shape_and_slices"
   input: "dnn/hiddenlayer_0/bias/part_0/read"
-  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad/read"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta/read"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1/read"
   input: "dnn/hiddenlayer_0/kernel/part_0/read"
-  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad/read"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta/read"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1/read"
   input: "dnn/hiddenlayer_1/bias/part_0/read"
-  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad/read"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta/read"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1/read"
   input: "dnn/hiddenlayer_1/kernel/part_0/read"
-  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad/read"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta/read"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1/read"
   input: "dnn/hiddenlayer_2/bias/part_0/read"
-  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad/read"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta/read"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1/read"
   input: "dnn/hiddenlayer_2/kernel/part_0/read"
-  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad/read"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta/read"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1/read"
   input: "dnn/logits/bias/part_0/read"
-  input: "dnn/dnn/logits/bias/part_0/Adagrad/read"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta/read"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta_1/read"
   input: "dnn/logits/kernel/part_0/read"
-  input: "dnn/dnn/logits/kernel/part_0/Adagrad/read"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta/read"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta_1/read"
   input: "global_step"
   attr {
     key: "dtypes"
     value {
       list {
+        type: DT_FLOAT
+        type: DT_FLOAT
+        type: DT_FLOAT
+        type: DT_FLOAT
+        type: DT_FLOAT
+        type: DT_FLOAT
+        type: DT_FLOAT
+        type: DT_FLOAT
         type: DT_FLOAT
         type: DT_FLOAT
         type: DT_FLOAT
@@ -17285,7 +20622,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/hiddenlayer_0/bias/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_0/bias/t_0/Adadelta"
       }
     }
   }
@@ -17354,7 +20691,7 @@ node {
 node {
   name: "save/Assign_1"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta"
   input: "save/RestoreV2_1"
   attr {
     key: "T"
@@ -17426,7 +20763,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/hiddenlayer_0/kernel"
+        string_val: "dnn/hiddenlayer_0/bias/t_0/Adadelta_1"
       }
     }
   }
@@ -17462,7 +20799,7 @@ node {
             size: 1
           }
         }
-        string_val: "5 1024 0,5:0,1024"
+        string_val: "1024 0,1024"
       }
     }
   }
@@ -17495,7 +20832,7 @@ node {
 node {
   name: "save/Assign_2"
   op: "Assign"
-  input: "dnn/hiddenlayer_0/kernel/part_0"
+  input: "dnn/dnn/hiddenlayer_0/bias/part_0/Adadelta_1"
   input: "save/RestoreV2_2"
   attr {
     key: "T"
@@ -17507,7 +20844,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/hiddenlayer_0/kernel/part_0"
+        s: "loc:@dnn/hiddenlayer_0/bias/part_0"
       }
     }
   }
@@ -17516,9 +20853,6 @@ node {
     value {
       list {
         shape {
-          dim {
-            size: 5
-          }
           dim {
             size: 1024
           }
@@ -17570,7 +20904,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/hiddenlayer_0/kernel/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_0/kernel"
       }
     }
   }
@@ -17606,7 +20940,7 @@ node {
             size: 1
           }
         }
-        string_val: "5 1024 0,5:0,1024"
+        string_val: "8 1024 0,8:0,1024"
       }
     }
   }
@@ -17639,7 +20973,7 @@ node {
 node {
   name: "save/Assign_3"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adagrad"
+  input: "dnn/hiddenlayer_0/kernel/part_0"
   input: "save/RestoreV2_3"
   attr {
     key: "T"
@@ -17661,7 +20995,7 @@ node {
       list {
         shape {
           dim {
-            size: 5
+            size: 8
           }
           dim {
             size: 1024
@@ -17714,7 +21048,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/hiddenlayer_1/bias"
+        string_val: "dnn/hiddenlayer_0/kernel/t_0/Adadelta"
       }
     }
   }
@@ -17750,7 +21084,7 @@ node {
             size: 1
           }
         }
-        string_val: "512 0,512"
+        string_val: "8 1024 0,8:0,1024"
       }
     }
   }
@@ -17783,7 +21117,7 @@ node {
 node {
   name: "save/Assign_4"
   op: "Assign"
-  input: "dnn/hiddenlayer_1/bias/part_0"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta"
   input: "save/RestoreV2_4"
   attr {
     key: "T"
@@ -17795,7 +21129,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/hiddenlayer_1/bias/part_0"
+        s: "loc:@dnn/hiddenlayer_0/kernel/part_0"
       }
     }
   }
@@ -17805,7 +21139,10 @@ node {
       list {
         shape {
           dim {
-            size: 512
+            size: 8
+          }
+          dim {
+            size: 1024
           }
         }
       }
@@ -17855,7 +21192,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/hiddenlayer_1/bias/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_0/kernel/t_0/Adadelta_1"
       }
     }
   }
@@ -17891,7 +21228,7 @@ node {
             size: 1
           }
         }
-        string_val: "512 0,512"
+        string_val: "8 1024 0,8:0,1024"
       }
     }
   }
@@ -17924,7 +21261,7 @@ node {
 node {
   name: "save/Assign_5"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_0/kernel/part_0/Adadelta_1"
   input: "save/RestoreV2_5"
   attr {
     key: "T"
@@ -17936,7 +21273,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/hiddenlayer_1/bias/part_0"
+        s: "loc:@dnn/hiddenlayer_0/kernel/part_0"
       }
     }
   }
@@ -17946,7 +21283,10 @@ node {
       list {
         shape {
           dim {
-            size: 512
+            size: 8
+          }
+          dim {
+            size: 1024
           }
         }
       }
@@ -17996,7 +21336,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/hiddenlayer_1/kernel"
+        string_val: "dnn/hiddenlayer_1/bias"
       }
     }
   }
@@ -18032,7 +21372,7 @@ node {
             size: 1
           }
         }
-        string_val: "1024 512 0,1024:0,512"
+        string_val: "512 0,512"
       }
     }
   }
@@ -18065,7 +21405,7 @@ node {
 node {
   name: "save/Assign_6"
   op: "Assign"
-  input: "dnn/hiddenlayer_1/kernel/part_0"
+  input: "dnn/hiddenlayer_1/bias/part_0"
   input: "save/RestoreV2_6"
   attr {
     key: "T"
@@ -18077,7 +21417,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/hiddenlayer_1/kernel/part_0"
+        s: "loc:@dnn/hiddenlayer_1/bias/part_0"
       }
     }
   }
@@ -18086,9 +21426,6 @@ node {
     value {
       list {
         shape {
-          dim {
-            size: 1024
-          }
           dim {
             size: 512
           }
@@ -18140,7 +21477,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/hiddenlayer_1/kernel/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_1/bias/t_0/Adadelta"
       }
     }
   }
@@ -18176,7 +21513,7 @@ node {
             size: 1
           }
         }
-        string_val: "1024 512 0,1024:0,512"
+        string_val: "512 0,512"
       }
     }
   }
@@ -18209,7 +21546,7 @@ node {
 node {
   name: "save/Assign_7"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta"
   input: "save/RestoreV2_7"
   attr {
     key: "T"
@@ -18221,7 +21558,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/hiddenlayer_1/kernel/part_0"
+        s: "loc:@dnn/hiddenlayer_1/bias/part_0"
       }
     }
   }
@@ -18230,9 +21567,6 @@ node {
     value {
       list {
         shape {
-          dim {
-            size: 1024
-          }
           dim {
             size: 512
           }
@@ -18284,7 +21618,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/hiddenlayer_2/bias"
+        string_val: "dnn/hiddenlayer_1/bias/t_0/Adadelta_1"
       }
     }
   }
@@ -18320,7 +21654,7 @@ node {
             size: 1
           }
         }
-        string_val: "256 0,256"
+        string_val: "512 0,512"
       }
     }
   }
@@ -18353,7 +21687,7 @@ node {
 node {
   name: "save/Assign_8"
   op: "Assign"
-  input: "dnn/hiddenlayer_2/bias/part_0"
+  input: "dnn/dnn/hiddenlayer_1/bias/part_0/Adadelta_1"
   input: "save/RestoreV2_8"
   attr {
     key: "T"
@@ -18365,7 +21699,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/hiddenlayer_2/bias/part_0"
+        s: "loc:@dnn/hiddenlayer_1/bias/part_0"
       }
     }
   }
@@ -18375,7 +21709,7 @@ node {
       list {
         shape {
           dim {
-            size: 256
+            size: 512
           }
         }
       }
@@ -18425,7 +21759,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/hiddenlayer_2/bias/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_1/kernel"
       }
     }
   }
@@ -18461,7 +21795,7 @@ node {
             size: 1
           }
         }
-        string_val: "256 0,256"
+        string_val: "1024 512 0,1024:0,512"
       }
     }
   }
@@ -18494,7 +21828,7 @@ node {
 node {
   name: "save/Assign_9"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adagrad"
+  input: "dnn/hiddenlayer_1/kernel/part_0"
   input: "save/RestoreV2_9"
   attr {
     key: "T"
@@ -18506,7 +21840,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/hiddenlayer_2/bias/part_0"
+        s: "loc:@dnn/hiddenlayer_1/kernel/part_0"
       }
     }
   }
@@ -18516,7 +21850,10 @@ node {
       list {
         shape {
           dim {
-            size: 256
+            size: 1024
+          }
+          dim {
+            size: 512
           }
         }
       }
@@ -18566,7 +21903,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/hiddenlayer_2/kernel"
+        string_val: "dnn/hiddenlayer_1/kernel/t_0/Adadelta"
       }
     }
   }
@@ -18602,7 +21939,7 @@ node {
             size: 1
           }
         }
-        string_val: "512 256 0,512:0,256"
+        string_val: "1024 512 0,1024:0,512"
       }
     }
   }
@@ -18635,7 +21972,7 @@ node {
 node {
   name: "save/Assign_10"
   op: "Assign"
-  input: "dnn/hiddenlayer_2/kernel/part_0"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta"
   input: "save/RestoreV2_10"
   attr {
     key: "T"
@@ -18647,7 +21984,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/hiddenlayer_2/kernel/part_0"
+        s: "loc:@dnn/hiddenlayer_1/kernel/part_0"
       }
     }
   }
@@ -18657,10 +21994,10 @@ node {
       list {
         shape {
           dim {
-            size: 512
+            size: 1024
           }
           dim {
-            size: 256
+            size: 512
           }
         }
       }
@@ -18710,7 +22047,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/hiddenlayer_2/kernel/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_1/kernel/t_0/Adadelta_1"
       }
     }
   }
@@ -18746,7 +22083,7 @@ node {
             size: 1
           }
         }
-        string_val: "512 256 0,512:0,256"
+        string_val: "1024 512 0,1024:0,512"
       }
     }
   }
@@ -18779,7 +22116,7 @@ node {
 node {
   name: "save/Assign_11"
   op: "Assign"
-  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_1/kernel/part_0/Adadelta_1"
   input: "save/RestoreV2_11"
   attr {
     key: "T"
@@ -18791,7 +22128,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/hiddenlayer_2/kernel/part_0"
+        s: "loc:@dnn/hiddenlayer_1/kernel/part_0"
       }
     }
   }
@@ -18801,10 +22138,10 @@ node {
       list {
         shape {
           dim {
-            size: 512
+            size: 1024
           }
           dim {
-            size: 256
+            size: 512
           }
         }
       }
@@ -18854,7 +22191,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/logits/bias"
+        string_val: "dnn/hiddenlayer_2/bias"
       }
     }
   }
@@ -18890,7 +22227,7 @@ node {
             size: 1
           }
         }
-        string_val: "1 0,1"
+        string_val: "256 0,256"
       }
     }
   }
@@ -18923,7 +22260,7 @@ node {
 node {
   name: "save/Assign_12"
   op: "Assign"
-  input: "dnn/logits/bias/part_0"
+  input: "dnn/hiddenlayer_2/bias/part_0"
   input: "save/RestoreV2_12"
   attr {
     key: "T"
@@ -18935,7 +22272,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/logits/bias/part_0"
+        s: "loc:@dnn/hiddenlayer_2/bias/part_0"
       }
     }
   }
@@ -18945,7 +22282,7 @@ node {
       list {
         shape {
           dim {
-            size: 1
+            size: 256
           }
         }
       }
@@ -18995,7 +22332,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/logits/bias/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_2/bias/t_0/Adadelta"
       }
     }
   }
@@ -19031,7 +22368,7 @@ node {
             size: 1
           }
         }
-        string_val: "1 0,1"
+        string_val: "256 0,256"
       }
     }
   }
@@ -19064,7 +22401,7 @@ node {
 node {
   name: "save/Assign_13"
   op: "Assign"
-  input: "dnn/dnn/logits/bias/part_0/Adagrad"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta"
   input: "save/RestoreV2_13"
   attr {
     key: "T"
@@ -19076,7 +22413,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/logits/bias/part_0"
+        s: "loc:@dnn/hiddenlayer_2/bias/part_0"
       }
     }
   }
@@ -19086,7 +22423,7 @@ node {
       list {
         shape {
           dim {
-            size: 1
+            size: 256
           }
         }
       }
@@ -19136,7 +22473,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/logits/kernel"
+        string_val: "dnn/hiddenlayer_2/bias/t_0/Adadelta_1"
       }
     }
   }
@@ -19172,7 +22509,7 @@ node {
             size: 1
           }
         }
-        string_val: "256 1 0,256:0,1"
+        string_val: "256 0,256"
       }
     }
   }
@@ -19205,7 +22542,7 @@ node {
 node {
   name: "save/Assign_14"
   op: "Assign"
-  input: "dnn/logits/kernel/part_0"
+  input: "dnn/dnn/hiddenlayer_2/bias/part_0/Adadelta_1"
   input: "save/RestoreV2_14"
   attr {
     key: "T"
@@ -19217,7 +22554,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/logits/kernel/part_0"
+        s: "loc:@dnn/hiddenlayer_2/bias/part_0"
       }
     }
   }
@@ -19228,9 +22565,6 @@ node {
         shape {
           dim {
             size: 256
-          }
-          dim {
-            size: 1
           }
         }
       }
@@ -19280,7 +22614,7 @@ node {
             size: 1
           }
         }
-        string_val: "dnn/logits/kernel/t_0/Adagrad"
+        string_val: "dnn/hiddenlayer_2/kernel"
       }
     }
   }
@@ -19316,7 +22650,7 @@ node {
             size: 1
           }
         }
-        string_val: "256 1 0,256:0,1"
+        string_val: "512 256 0,512:0,256"
       }
     }
   }
@@ -19349,7 +22683,7 @@ node {
 node {
   name: "save/Assign_15"
   op: "Assign"
-  input: "dnn/dnn/logits/kernel/part_0/Adagrad"
+  input: "dnn/hiddenlayer_2/kernel/part_0"
   input: "save/RestoreV2_15"
   attr {
     key: "T"
@@ -19361,7 +22695,7 @@ node {
     key: "_class"
     value {
       list {
-        s: "loc:@dnn/logits/kernel/part_0"
+        s: "loc:@dnn/hiddenlayer_2/kernel/part_0"
       }
     }
   }
@@ -19371,10 +22705,10 @@ node {
       list {
         shape {
           dim {
-            size: 256
+            size: 512
           }
           dim {
-            size: 1
+            size: 256
           }
         }
       }
@@ -19424,7 +22758,7 @@ node {
             size: 1
           }
         }
-        string_val: "global_step"
+        string_val: "dnn/hiddenlayer_2/kernel/t_0/Adadelta"
       }
     }
   }
@@ -19460,7 +22794,7 @@ node {
             size: 1
           }
         }
-        string_val: ""
+        string_val: "512 256 0,512:0,256"
       }
     }
   }
@@ -19485,7 +22819,7 @@ node {
     key: "dtypes"
     value {
       list {
-        type: DT_INT64
+        type: DT_FLOAT
       }
     }
   }
@@ -19493,8 +22827,1151 @@ node {
 node {
   name: "save/Assign_16"
   op: "Assign"
-  input: "global_step"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta"
   input: "save/RestoreV2_16"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 512
+          }
+          dim {
+            size: 256
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_17/tensor_names"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "dnn/hiddenlayer_2/kernel/t_0/Adadelta_1"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_17/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "512 256 0,512:0,256"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_17"
+  op: "RestoreV2"
+  input: "save/Const"
+  input: "save/RestoreV2_17/tensor_names"
+  input: "save/RestoreV2_17/shape_and_slices"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          unknown_rank: true
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_FLOAT
+      }
+    }
+  }
+}
+node {
+  name: "save/Assign_17"
+  op: "Assign"
+  input: "dnn/dnn/hiddenlayer_2/kernel/part_0/Adadelta_1"
+  input: "save/RestoreV2_17"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/hiddenlayer_2/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 512
+          }
+          dim {
+            size: 256
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_18/tensor_names"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "dnn/logits/bias"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_18/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "1 0,1"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_18"
+  op: "RestoreV2"
+  input: "save/Const"
+  input: "save/RestoreV2_18/tensor_names"
+  input: "save/RestoreV2_18/shape_and_slices"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          unknown_rank: true
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_FLOAT
+      }
+    }
+  }
+}
+node {
+  name: "save/Assign_18"
+  op: "Assign"
+  input: "dnn/logits/bias/part_0"
+  input: "save/RestoreV2_18"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_19/tensor_names"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "dnn/logits/bias/t_0/Adadelta"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_19/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "1 0,1"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_19"
+  op: "RestoreV2"
+  input: "save/Const"
+  input: "save/RestoreV2_19/tensor_names"
+  input: "save/RestoreV2_19/shape_and_slices"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          unknown_rank: true
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_FLOAT
+      }
+    }
+  }
+}
+node {
+  name: "save/Assign_19"
+  op: "Assign"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta"
+  input: "save/RestoreV2_19"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_20/tensor_names"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "dnn/logits/bias/t_0/Adadelta_1"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_20/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "1 0,1"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_20"
+  op: "RestoreV2"
+  input: "save/Const"
+  input: "save/RestoreV2_20/tensor_names"
+  input: "save/RestoreV2_20/shape_and_slices"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          unknown_rank: true
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_FLOAT
+      }
+    }
+  }
+}
+node {
+  name: "save/Assign_20"
+  op: "Assign"
+  input: "dnn/dnn/logits/bias/part_0/Adadelta_1"
+  input: "save/RestoreV2_20"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/bias/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_21/tensor_names"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "dnn/logits/kernel"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_21/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "256 1 0,256:0,1"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_21"
+  op: "RestoreV2"
+  input: "save/Const"
+  input: "save/RestoreV2_21/tensor_names"
+  input: "save/RestoreV2_21/shape_and_slices"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          unknown_rank: true
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_FLOAT
+      }
+    }
+  }
+}
+node {
+  name: "save/Assign_21"
+  op: "Assign"
+  input: "dnn/logits/kernel/part_0"
+  input: "save/RestoreV2_21"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 256
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_22/tensor_names"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "dnn/logits/kernel/t_0/Adadelta"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_22/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "256 1 0,256:0,1"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_22"
+  op: "RestoreV2"
+  input: "save/Const"
+  input: "save/RestoreV2_22/tensor_names"
+  input: "save/RestoreV2_22/shape_and_slices"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          unknown_rank: true
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_FLOAT
+      }
+    }
+  }
+}
+node {
+  name: "save/Assign_22"
+  op: "Assign"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta"
+  input: "save/RestoreV2_22"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 256
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_23/tensor_names"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "dnn/logits/kernel/t_0/Adadelta_1"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_23/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "256 1 0,256:0,1"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_23"
+  op: "RestoreV2"
+  input: "save/Const"
+  input: "save/RestoreV2_23/tensor_names"
+  input: "save/RestoreV2_23/shape_and_slices"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          unknown_rank: true
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_FLOAT
+      }
+    }
+  }
+}
+node {
+  name: "save/Assign_23"
+  op: "Assign"
+  input: "dnn/dnn/logits/kernel/part_0/Adadelta_1"
+  input: "save/RestoreV2_23"
+  attr {
+    key: "T"
+    value {
+      type: DT_FLOAT
+    }
+  }
+  attr {
+    key: "_class"
+    value {
+      list {
+        s: "loc:@dnn/logits/kernel/part_0"
+      }
+    }
+  }
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 256
+          }
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "use_locking"
+    value {
+      b: true
+    }
+  }
+  attr {
+    key: "validate_shape"
+    value {
+      b: true
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_24/tensor_names"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: "global_step"
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_24/shape_and_slices"
+  op: "Const"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          dim {
+            size: 1
+          }
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtype"
+    value {
+      type: DT_STRING
+    }
+  }
+  attr {
+    key: "value"
+    value {
+      tensor {
+        dtype: DT_STRING
+        tensor_shape {
+          dim {
+            size: 1
+          }
+        }
+        string_val: ""
+      }
+    }
+  }
+}
+node {
+  name: "save/RestoreV2_24"
+  op: "RestoreV2"
+  input: "save/Const"
+  input: "save/RestoreV2_24/tensor_names"
+  input: "save/RestoreV2_24/shape_and_slices"
+  attr {
+    key: "_output_shapes"
+    value {
+      list {
+        shape {
+          unknown_rank: true
+        }
+      }
+    }
+  }
+  attr {
+    key: "dtypes"
+    value {
+      list {
+        type: DT_INT64
+      }
+    }
+  }
+}
+node {
+  name: "save/Assign_24"
+  op: "Assign"
+  input: "global_step"
+  input: "save/RestoreV2_24"
   attr {
     key: "T"
     value {
@@ -19551,6 +24028,14 @@ node {
   input: "^save/Assign_14"
   input: "^save/Assign_15"
   input: "^save/Assign_16"
+  input: "^save/Assign_17"
+  input: "^save/Assign_18"
+  input: "^save/Assign_19"
+  input: "^save/Assign_20"
+  input: "^save/Assign_21"
+  input: "^save/Assign_22"
+  input: "^save/Assign_23"
+  input: "^save/Assign_24"
 }
 node {
   name: "save/restore_all"

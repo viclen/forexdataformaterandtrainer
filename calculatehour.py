@@ -1,13 +1,19 @@
 import os.path
 
-sma_period = 20
-rsi_period = 14
+# Periods to be calculated
+short_sma_period = 24
+long_sma_period = 168
+short_rsi_period = 12
+long_rsi_period = 84
 
+# How many periods will be predicted?
 prediction_period = 0
 
-header = "Time,EMA,SMA,RSI,HBB,LBB,Value\r\n"
+# Header for the file
+header = "Time,shortEMA,shortSMA,shortRSI,longEMA,longSMA,longRSI,HBB,LBB,Previous,Value\r\n"
 data = ""
 
+# Get the raw data to be used to do the math
 if os.path.exists("rates-p/completehour.txt"):
     f = open("rates-p/completehour.txt","r")
     data = f.read()
@@ -24,20 +30,26 @@ else:
     f.write(data)
     f.close()
     
+# Split it to lines to be read
 lines = data.splitlines()
 
-sma_values = []
-rsi_values = []
+# Arrays with the values while running the for loop
+short_sma_values = []
+long_sma_values = []
+short_rsi_values = []
+long_rsi_values = []
 
+# Result lines to be written to the file
 result = []
 
+# Set some upfront previous data
 previous_value = 0
-last_ema = 0
-
+last_short_ema = 0
+last_long_ema = 0
 value = 0
-
 last_line = ""
 
+# Process starts
 for line in lines:
     # Cells in the line
     cells = line.split(",")
@@ -52,92 +64,148 @@ for line in lines:
     else:
         value = float(cells[1])
 
-    # Simple Moving Average Indicator
-    sma = 0
-    sma_count = 0
-    sum1 = 0
-    smma = 0
-    for val in sma_values:
-        sum1 += val
-        sma_count += 1
-    if sma_count > 0:
-        sma = sum1 / sma_count
+    # SHORT Simple Moving Average Indicator
+    short_sma = 0
+    short_sma_count = 0
+    short_sum1 = 0
+    short_smma = 0
+    for val in short_sma_values:
+        short_sum1 += val
+        short_sma_count += 1
+    if short_sma_count > 0:
+        short_sma = short_sum1 / short_sma_count
 
-        smma = (sum1 - sma + value) / sma_count
+        short_smma = (short_sum1 - short_sma + value) / short_sma_count
     else:
-        sma = value
-    sma_values.append(value)
+        short_sma = value
+    short_sma_values.append(value)
     #####################################
 
-    # Relative Strength Index
-    avg_loss = 0
-    avg_gain = 0
-    gains = 0
-    losses = 0
-    rsi = 0
-    for val in rsi_values:
+    # LONG Simple Moving Average Indicator
+    long_sma = 0
+    long_sma_count = 0
+    long_sum1 = 0
+    long_smma = 0
+    for val in long_sma_values:
+        long_sum1 += val
+        long_sma_count += 1
+    if long_sma_count > 0:
+        long_sma = long_sum1 / long_sma_count
+
+        long_smma = (long_sum1 - long_sma + value) / long_sma_count
+    else:
+        long_sma = value
+    long_sma_values.append(value)
+    #####################################
+
+    # SHORT Relative Strength Index
+    short_avg_loss = 0
+    short_avg_gain = 0
+    short_gains = 0
+    short_losses = 0
+    short_rsi = 0
+    for val in short_rsi_values:
         if val < 0:
-            losses += 1
-            avg_loss += val * -1
+            short_losses += 1
+            short_avg_loss += val * -1
         elif val > 0:
-            gains += 1
-            avg_gain += val
-    if gains > 0:
-        avg_gain = avg_gain / gains
-    if losses > 0:
-        avg_loss = avg_loss / losses
+            short_gains += 1
+            short_avg_gain += val
+    if short_gains > 0:
+        short_avg_gain = short_avg_gain / short_gains
+    if short_losses > 0:
+        short_avg_loss = short_avg_loss / short_losses
 
-        rs = avg_gain / avg_loss
-        rsi = 100 - (100 / (1 + rs))
+        rs = short_avg_gain / short_avg_loss
+        short_rsi = 100 - (100 / (1 + rs))
     if previous_value != 0:
-        rsi_values.append(value - previous_value)
+        short_rsi_values.append(value - previous_value)
     #########################################
 
-    # Exponencial Moving Average (EMA)
-    weighted_multiplier = 2 / (sma_period + 1)
+    # LONG Relative Strength Index
+    long_avg_loss = 0
+    long_avg_gain = 0
+    long_gains = 0
+    long_losses = 0
+    long_rsi = 0
+    for val in long_rsi_values:
+        if val < 0:
+            long_losses += 1
+            long_avg_loss += val * -1
+        elif val > 0:
+            long_gains += 1
+            long_avg_gain += val
+    if long_gains > 0:
+        long_avg_gain = long_avg_gain / long_gains
+    if long_losses > 0:
+        long_avg_loss = long_avg_loss / long_losses
 
-    ema = value * weighted_multiplier + last_ema * (1 - weighted_multiplier)
-
-    last_ema = ema
+        rs = long_avg_gain / long_avg_loss
+        long_rsi = 100 - (100 / (1 + rs))
+    if previous_value != 0:
+        long_rsi_values.append(value - previous_value)
     #########################################
 
-    # Bollinger Bands
+    # SHORT Exponencial Moving Average (EMA)
+    weighted_multiplier = 2 / (short_sma_period + 1)
+
+    short_ema = value * weighted_multiplier + last_short_ema * (1 - weighted_multiplier)
+
+    last_short_ema = short_ema
+    #########################################
+
+    # SHORT Exponencial Moving Average (EMA)
+    weighted_multiplier = 2 / (long_sma_period + 1)
+
+    long_ema = value * weighted_multiplier + last_long_ema * (1 - weighted_multiplier)
+
+    last_long_ema = long_ema
+    #########################################
+
+    # SHORT Bollinger Bands
     # -- Standard deviation
     sd = 0
-    for val in sma_values:
-        sd += (val - sma) ** 2
-    if sma_count > 0:
-        sd = (sd / sma_count) ** 0.5
+    for val in short_sma_values:
+        sd += (val - short_sma) ** 2
+    if short_sma_count > 0:
+        sd = (sd / short_sma_count) ** 0.5
     # --
 
     # -- Higher band
-    higher_band = sma + 2 * sd
+    higher_band = short_sma + 2 * sd
 
     # -- Lower band
-    lower_band = sma - 2 * sd
+    lower_band = short_sma - 2 * sd
     ##########################################
 
     # Result array
-    if time.__len__() and value!=0 and rsi!=0 and sma!=0:
-        result.append("{},{},{},{},{},{},{}\r\n".format(time,ema,sma,rsi,higher_band,lower_band,next_value))
+    if time.__len__() and value!=0 and short_rsi!=0 and long_rsi!=0 and short_sma!=0 and long_sma!=0:
+        result.append("{},{},{},{},{},{},{},{},{},{},{}\r\n".format(time,short_ema,long_ema,short_sma,long_sma,short_rsi,long_rsi,higher_band,lower_band,previous_value,next_value))
 
+    # Moving arrays - deleting the first item so it's always the same sizes
+    if short_sma_values.__len__() >= short_sma_period:
+        short_sma_values.__delitem__(0)
+    if short_rsi_values.__len__() >= short_rsi_period:
+        short_rsi_values.__delitem__(0)
+    if long_sma_values.__len__() >= long_sma_period:
+        long_sma_values.__delitem__(0)
+    if long_rsi_values.__len__() >= long_rsi_period:
+        long_rsi_values.__delitem__(0)
+
+    # Previous values to be uses in the next runs
     previous_value = value
-
-    # Moving arrays
-    if sma_values.__len__() >= sma_period:
-        sma_values.__delitem__(0)
-    if rsi_values.__len__() >= rsi_period:
-        rsi_values.__delitem__(0)
-
     last_line = line
 
+# If there is a result, take the first lines to make sure the next ones are right
 if result.__len__()>0:
-    result.__delitem__(slice(0,sma_period))
+    result.__delitem__(slice(0,long_sma_period))
 
+# All the data that will be stored to the file
 info = ""
 for line in result:
     info += line
 
+# Write it to the file
 f = open("rates-p/completehour.csv","w+")
 f.write(header + info)
 f.close()

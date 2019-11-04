@@ -7,7 +7,7 @@ from sklearn.metrics import mean_squared_error
 import os
 import time
 
-forex = pd.read_csv("rates-p/bitcoin.csv",index_col="Time")
+forex = pd.read_csv("rates-p/completehour.csv",index_col="Time")
 
 forex.index = pd.to_datetime(forex.index)
 
@@ -32,34 +32,33 @@ scaler.fit(X_train)
 X_train = pd.DataFrame(data=scaler.transform(X_train),columns = X_train.columns,index=X_train.index)
 X_test = pd.DataFrame(data=scaler.transform(X_test),columns = X_test.columns,index=X_test.index)
 
-ema = tf.feature_column.numeric_column('EMA')
-sma = tf.feature_column.numeric_column('SMA')
-rsi = tf.feature_column.numeric_column('RSI')
+short_ema = tf.feature_column.numeric_column('shortEMA')
+short_sma = tf.feature_column.numeric_column('shortSMA')
+short_rsi = tf.feature_column.numeric_column('shortRSI')
+long_ema = tf.feature_column.numeric_column('longEMA')
+long_sma = tf.feature_column.numeric_column('longSMA')
+long_rsi = tf.feature_column.numeric_column('longRSI')
 hbb = tf.feature_column.numeric_column('HBB')
 lbb = tf.feature_column.numeric_column('LBB')
 
-feat_cols = [ema, sma, rsi, hbb, lbb]
+feat_cols = [short_ema, short_sma, short_rsi, long_ema, long_sma, long_rsi, hbb, lbb]
 
 input_func = tf.estimator.inputs.pandas_input_fn(x=X_train,y=y_train,batch_size=100,num_epochs=2000,shuffle=True)
 
-optimizer = tf.train.AdagradOptimizer(learning_rate=0.01)
+optimizer = tf.train.AdadeltaOptimizer(learning_rate=0.01)
+# optimizer = tf.train.AdagradOptimizer(learning_rate=0.01)
+#     tf.train.ProximalAdagradOptimizer(
+#     learning_rate=0.1,
+#     l1_regularization_strength=0.001
+# )
 
 model = tf.estimator.DNNRegressor(hidden_units=[1024, 512, 256],
                                 feature_columns=feat_cols,
-                                model_dir=os.getcwd()+'/models-b',
+                                model_dir=os.getcwd()+'/models',
                                 activation_fn=tf.nn.relu,
                                 optimizer=optimizer)
 
-# model = tf.estimator.DNNRegressor(hidden_units=[1024, 512, 256],
-#                                 optimizer=tf.train.ProximalAdagradOptimizer(
-#                                     learning_rate=0.1,
-#                                     l1_regularization_strength=0.001
-#                                 )
-#                                 feature_columns=feat_cols,
-#                                 model_dir=os.getcwd()+'/models',
-#                                 activation_fn=tf.nn.relu)
-
-print("Starting train")
+print("Starting training")
 millis = time.time()
 model.train(input_fn=input_func,steps=50000)
 print("Total time: {} s".format(round(time.time() - millis, 3)))
